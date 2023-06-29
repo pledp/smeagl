@@ -1,3 +1,0 @@
-C:/Users/lasse/dev/SDL2-Test/build/CMakeFiles/SDL2Test.dir
-C:/Users/lasse/dev/SDL2-Test/build/CMakeFiles/edit_cache.dir
-C:/Users/lasse/dev/SDL2-Test/build/CMakeFiles/rebuild_cache.dir
