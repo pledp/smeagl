@@ -1,2 +1,2 @@
-# pledGL
-OpenGL &amp; SDL2 tests and experiments.
+### pledGL
+OpenGL and SDL2 tests and experiments.
