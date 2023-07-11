@@ -1,9 +1,9 @@
-#ifndef APP2_H_
-#define APP2_H_
+#ifndef D_APPLICATION_H_
+#define D_APPLICATION_H_
 
 #include "App.h"
 
-class app2 : public App {
+class DemoApplication : public App {
     public:
         void Init() override;
         void Update() override;

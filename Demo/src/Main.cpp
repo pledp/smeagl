@@ -1,10 +1,10 @@
 #include "SDLRenderer.h"
-#include "app2.h"
+#include "DemoApplication.h"
 #include "Game.h"
 
 int main(int argc, char *argv[]) {
 
-    App* application = new app2();
+    App* application = new DemoApplication();
 
     Game game(application);
     RendererBase* graphics = new SDLRenderer();
