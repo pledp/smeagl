@@ -15,10 +15,10 @@ private:
 public:
     SDLRenderer();
 
-    void init() override;
-    void exit() override;
-    void render() override;
-    void processInput() override;
+    void Init() override;
+    void Exit() override;
+    void Render() override;
+    void ProcessInput() override;
 };
 
 #endif

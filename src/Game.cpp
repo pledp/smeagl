@@ -5,15 +5,17 @@
 #include "SDLRenderer.h"
 #include "Game.h"
 
-Game::Game() {
+Game::Game(App* application) {
     this->FPS = 60;
+    this->application = application;
 }
 
 void Game::Init() {
-    graphics->init();
+    graphics->Init();
+    application->Init();
 }
 
-void Game::run() {
+void Game::Run() {
     this->Init();
     this->IsPlaying = true;
     
@@ -36,26 +38,28 @@ void Game::run() {
         }
     }
 
-    graphics->exit();
+    graphics->Exit();
 }
 
 void Game::Update() {
-    std::cout << "New tick!";
+    application->Update();
 }
 
 void Game::Render() {
-    graphics->render();
+    application->Render();
+    graphics->Render();
 }
 
 void Game::ProcessInput() {
-    graphics->processInput();
+    application->ProcessInput();
+    graphics->ProcessInput();
 }
 
-void Game::end() {
+void Game::End() {
     this->IsPlaying = false;
 }
 
-void Game::setGraphics(RendererBase* graphics) {
+void Game::SetGraphics(RendererBase* graphics) {
     this->graphics = graphics;
 }
 

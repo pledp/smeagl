@@ -30,6 +30,7 @@ target_include_directories(
     ${PROJECT_NAME}
         PUBLIC include/
         PUBLIC include/Graphics/
+        PUBLIC include/Application/
         PUBLIC ${SDL2_INCLUDE_DIRS}
 )
 

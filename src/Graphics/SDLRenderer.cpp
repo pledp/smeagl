@@ -6,7 +6,7 @@ SDLRenderer::SDLRenderer() {
 
 }
 
-void SDLRenderer::init() {
+void SDLRenderer::Init() {
     this->width = 1024;
     this->height = 768;
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -19,14 +19,14 @@ void SDLRenderer::init() {
     std::cout << "Window created!";
 }
 
-void SDLRenderer::exit() {
+void SDLRenderer::Exit() {
     window = NULL; 
     renderer = NULL;
 
     SDL_Quit();
 }
 
-void SDLRenderer::render() {
+void SDLRenderer::Render() {
     // Set color to white
     SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255);
 
@@ -37,11 +37,12 @@ void SDLRenderer::render() {
     SDL_RenderPresent(renderer);
 }
 
-void SDLRenderer::processInput() {
+void SDLRenderer::ProcessInput() {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) {
-            game->end();
+            this->Exit();
+            game->End();
             return;
         }
     }

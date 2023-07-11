@@ -1,5 +1,5 @@
 #include "RendererBase.h"
 
-void RendererBase::setGame(Game* game) {
+void RendererBase::SetGame(Game* game) {
     this->game = game;
 }

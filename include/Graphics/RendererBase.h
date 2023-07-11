@@ -10,12 +10,12 @@ protected:
 public:
     virtual ~RendererBase() {};
 
-    virtual void init() = 0;
-    virtual void exit() = 0;
-    virtual void render() = 0;
-    virtual void processInput() = 0;
+    virtual void Init() = 0;
+    virtual void Exit() = 0;
+    virtual void Render() = 0;
+    virtual void ProcessInput() = 0;
 
-    void setGame(Game* game);
+    void SetGame(Game* game);
 
 };
 
