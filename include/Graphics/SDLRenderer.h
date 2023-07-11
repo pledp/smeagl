@@ -19,6 +19,11 @@ public:
     void Exit() override;
     void Render() override;
     void ProcessInput() override;
+    void DelayTime(Uint64 delay) override;
+    
+    Uint64 Frequency() override;
+    Uint64 StartLoop() override;
+    Uint64 EndLoop(int FPS, Uint64 start, Uint64 frequency) override;
 };
 
 #endif

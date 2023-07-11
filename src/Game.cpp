@@ -19,26 +19,22 @@ void Game::Run() {
     this->Init();
     this->IsPlaying = true;
     
-    const Uint64 frequency = SDL_GetPerformanceFrequency();
+    auto frequency = graphics->Frequency();
 
     while(this->IsPlaying) {
-        Uint64 start = SDL_GetPerformanceCounter();
-
         this->ProcessInput();
+
+        auto start = graphics->StartLoop();
+
         this->Update();
         this->Render();
 
-        // Cap FPS
-        Uint64 end = SDL_GetPerformanceCounter();
-        float elapsedTime = (end - start) / (float)frequency * 1000.0f;
-        Uint32 delayTime = (Uint32)ceil((1000/FPS) - elapsedTime); 
+        auto delayTime = graphics->EndLoop(FPS, start, frequency);
 
         if(delayTime > 0) {
-            SDL_Delay(delayTime);
+            graphics->DelayTime(delayTime);
         }
     }
-
-    graphics->Exit();
 }
 
 void Game::Update() {

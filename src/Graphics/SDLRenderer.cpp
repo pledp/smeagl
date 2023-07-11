@@ -1,6 +1,7 @@
 #include "SDLRenderer.h"
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <cmath>
 
 SDLRenderer::SDLRenderer() {
 
@@ -20,10 +21,11 @@ void SDLRenderer::Init() {
 }
 
 void SDLRenderer::Exit() {
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
     window = NULL; 
     renderer = NULL;
-
-    SDL_Quit();
 }
 
 void SDLRenderer::Render() {
@@ -40,10 +42,33 @@ void SDLRenderer::Render() {
 void SDLRenderer::ProcessInput() {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
-        if (e.type == SDL_QUIT) {
-            this->Exit();
-            game->End();
-            return;
+        switch(e.type) {
+            case SDL_QUIT:
+                Exit();
+                game->End();
+                break;
+            case SDL_WINDOWEVENT:
+                std::cout << "Moved window";
+                break;
         }
-    }
+    } 
+}
+
+Uint64 SDLRenderer::Frequency() {
+    return SDL_GetPerformanceFrequency();
+}
+
+Uint64 SDLRenderer::StartLoop() {
+    return SDL_GetPerformanceCounter();
+}
+
+Uint64 SDLRenderer::EndLoop(int FPS, Uint64 start, Uint64 frequency) {
+    Uint64 end = SDL_GetPerformanceCounter();
+    float elapsedTime = (end - start) / (float)frequency * 1000.0f;
+    Uint32 delayTime = (Uint32)ceil((1000/FPS) - elapsedTime); 
+    return delayTime;
+}
+
+void SDLRenderer::DelayTime(Uint64 delay) {
+    SDL_Delay(delay);
 }
