@@ -15,15 +15,12 @@ public:
     virtual void Exit() = 0;
     virtual void Render() = 0;
     virtual void ProcessInput() = 0;
-
-    // FPS cap things.
-    virtual Uint64 Frequency() = 0;
-    virtual Uint64 StartLoop() = 0;
-    virtual Uint64 EndLoop(int FPS, Uint64 start, Uint64 frequency) = 0;
-    virtual void DelayTime(Uint64 delay) = 0;
+    virtual void Loop(int FPS) = 0;
  
     void SetGame(Game* game);
 
+    // FPS cap time
+    int t;
 };
 
 #endif

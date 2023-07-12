@@ -13,6 +13,11 @@ public:
     void Run();
     void End();
 
+    void Update();
+    void Render();
+    void Init();
+    void ProcessInput();
+
     /**
      * Sets the graphics pipeline of the program.
      * 
@@ -26,11 +31,6 @@ private:
     App* application;
 
     int FPS;
-
-    void Update();
-    void Render();
-    void Init();
-    void ProcessInput();
 
     bool IsPlaying = false;
 };

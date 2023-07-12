@@ -10,11 +10,11 @@ void DemoApplication::Update() {
 }
 
 void DemoApplication::ProcessInput() {
-
+    std::cout << "Input";
 }
 
 void DemoApplication::Render() {
-
+    std::cout << "Render";
 }
 
 

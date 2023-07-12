@@ -6,7 +6,7 @@
 #include "Game.h"
 
 Game::Game(App* application) {
-    this->FPS = 60;
+    this->FPS = 144;
     this->application = application;
 }
 
@@ -19,21 +19,9 @@ void Game::Run() {
     this->Init();
     this->IsPlaying = true;
     
-    auto frequency = graphics->Frequency();
-
     while(this->IsPlaying) {
-        this->ProcessInput();
-
-        auto start = graphics->StartLoop();
-
-        this->Update();
-        this->Render();
-
-        auto delayTime = graphics->EndLoop(FPS, start, frequency);
-
-        if(delayTime > 0) {
-            graphics->DelayTime(delayTime);
-        }
+        ProcessInput();
+        graphics->Loop(FPS);
     }
 }
 

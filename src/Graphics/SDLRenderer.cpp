@@ -54,21 +54,15 @@ void SDLRenderer::ProcessInput() {
     } 
 }
 
-Uint64 SDLRenderer::Frequency() {
-    return SDL_GetPerformanceFrequency();
-}
+void SDLRenderer::Loop(int FPS) {
+    t = SDL_GetTicks();
+    
+    game->Update();
+    game->Render();
 
-Uint64 SDLRenderer::StartLoop() {
-    return SDL_GetPerformanceCounter();
-}
+    t = SDL_GetTicks() - t;
 
-Uint64 SDLRenderer::EndLoop(int FPS, Uint64 start, Uint64 frequency) {
-    Uint64 end = SDL_GetPerformanceCounter();
-    float elapsedTime = (end - start) / (float)frequency * 1000.0f;
-    Uint32 delayTime = (Uint32)ceil((1000/FPS) - elapsedTime); 
-    return delayTime;
-}
-
-void SDLRenderer::DelayTime(Uint64 delay) {
-    SDL_Delay(delay);
+    if(t < 1000 / FPS) {
+        SDL_Delay((1000/FPS) - t);
+    }
 }
