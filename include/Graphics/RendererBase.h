@@ -15,7 +15,7 @@ public:
     virtual void Exit() = 0;
     virtual void Render() = 0;
     virtual void ProcessInput() = 0;
-    virtual void Loop(int FPS) = 0;
+    virtual void Loop() = 0;
  
     void SetGame(Game* game);
 

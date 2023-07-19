@@ -10,6 +10,7 @@ SDLRenderer::SDLRenderer() {
 void SDLRenderer::Init() {
     this->width = 1024;
     this->height = 768;
+
     SDL_Init(SDL_INIT_EVERYTHING);
 
     window = SDL_CreateWindow("SDL2 Window", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,680, 480,0);
@@ -54,7 +55,7 @@ void SDLRenderer::ProcessInput() {
     } 
 }
 
-void SDLRenderer::Loop(int FPS) {
+void SDLRenderer::Loop() {
     t = SDL_GetTicks();
     
     game->Update();
@@ -62,7 +63,7 @@ void SDLRenderer::Loop(int FPS) {
 
     t = SDL_GetTicks() - t;
 
-    if(t < 1000 / FPS) {
-        SDL_Delay((1000/FPS) - t);
+    if(t < 1000 / game->fps) {
+        SDL_Delay((1000/game->fps) - t);
     }
 }

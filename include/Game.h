@@ -18,6 +18,8 @@ public:
     void Init();
     void ProcessInput();
 
+    int fps;
+
     /**
      * Sets the graphics pipeline of the program.
      * 
@@ -29,8 +31,6 @@ private:
     RendererBase* graphics;
 
     App* application;
-
-    int FPS;
 
     bool IsPlaying = false;
 };

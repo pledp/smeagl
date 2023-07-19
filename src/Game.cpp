@@ -6,7 +6,7 @@
 #include "Game.h"
 
 Game::Game(App* application) {
-    this->FPS = 144;
+    this->fps = 144;
     this->application = application;
 }
 
@@ -21,7 +21,7 @@ void Game::Run() {
     
     while(this->IsPlaying) {
         ProcessInput();
-        graphics->Loop(FPS);
+        graphics->Loop();
     }
 }
 

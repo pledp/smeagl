@@ -19,7 +19,7 @@ public:
     void Exit() override;
     void Render() override;
     void ProcessInput() override;
-    void Loop(int FPS) override;
+    void Loop() override;
 };
 
 #endif
