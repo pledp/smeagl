@@ -7,7 +7,6 @@ class DemoApplication : public App {
     public:
         void Init() override;
         void Update() override;
-        void ProcessInput() override;
         void Render() override;
 };
 

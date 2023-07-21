@@ -35,7 +35,6 @@ void Game::Render() {
 }
 
 void Game::ProcessInput() {
-    application->ProcessInput();
     graphics->ProcessInput();
 }
 
