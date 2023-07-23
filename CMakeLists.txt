@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 
+cmake_policy(SET CMP0079 NEW)
+
 project(SDL2Test)
 
 # Add include path
@@ -22,6 +24,8 @@ endforeach()
 message(STATUS "")
 
 add_executable(${PROJECT_NAME} ${SRC})
+
+add_subdirectory("lib")
 
 find_package(SDL2 REQUIRED)
 
