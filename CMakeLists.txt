@@ -27,6 +27,7 @@ add_executable(${PROJECT_NAME} ${SRC})
 
 add_subdirectory("lib")
 
+set(SDL2_DIR ${CMAKE_SOURCE_DIR}/lib/SDL)
 find_package(SDL2 REQUIRED)
 
 # Include SDL2 and include directory
@@ -47,20 +48,9 @@ target_link_libraries(
         SDL2
 )
 
-
 # Copy assets to executable's directory
 message(STATUS "Copying all assets to destination folder...")
 file(
     COPY assets
     DESTINATION ${OUTPUT_DIR}
 )
-
-message(STATUS "Copying all dependencies to destination folder...")
-file(GLOB PROJECT_DEPENDENCIES ${SDL2_LIBRARY}/*.dll)
-
-foreach(Dependency IN LISTS PROJECT_DEPENDENCIES)
-    file(
-        COPY ${Dependency}
-        DESTINATION ${OUTPUT_DIR}
-    )
-endforeach()
