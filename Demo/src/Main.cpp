@@ -1,18 +1,19 @@
-#include "SDLRenderer.h"
 #include "DemoApplication.h"
+
+#include "SDLRenderer.h"
 #include "Game.h"
 
 #include <iostream>
 
 int main(int argc, char *argv[]) {
-
+    Game* game = new Game();
     App* application = new DemoApplication();
-
-    Game* game = new Game(application);
     RendererBase* graphics = new SDLRenderer();
 
+    game->SetApp(application);
     game->SetGraphics(graphics);
-    graphics->SetGame(game);
+
+    game->CreateWindow();
     game->Run();
 
     delete application;

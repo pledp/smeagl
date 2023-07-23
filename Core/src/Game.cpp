@@ -5,21 +5,20 @@
 #include "SDLRenderer.h"
 #include "Game.h"
 
-Game::Game(App* application) {
+Game::Game() {
     this->fps = 144;
-    this->application = application;
 }
 
 void Game::Init() {
-    graphics->Init();
+    graphics->Init(this->createWindow);
     application->Init();
 }
 
 void Game::Run() {
     this->Init();
-    this->IsPlaying = true;
+    this->isPlaying = true;
     
-    while(this->IsPlaying) {
+    while(this->isPlaying) {
         ProcessInput();
         graphics->Loop();
     }
@@ -39,10 +38,19 @@ void Game::ProcessInput() {
 }
 
 void Game::End() {
-    this->IsPlaying = false;
+    this->isPlaying = false;
 }
 
 void Game::SetGraphics(RendererBase* graphics) {
     this->graphics = graphics;
+    this->graphics->SetGame(this);
+}
+
+void Game::SetApp(App* app) {
+    this->application = app;
+}
+
+void Game::CreateWindow() {
+    this->createWindow = true;
 }
 

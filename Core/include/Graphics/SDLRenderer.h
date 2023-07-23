@@ -15,7 +15,7 @@ private:
 public:
     SDLRenderer();
 
-    void Init() override;
+    void Init(bool createWindow) override;
     void Exit() override;
     void Render() override;
     void ProcessInput() override;

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.11)
 project(SDL2Test)
 
 # Add include path
-set(CMAKE_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/Core/include)
+set(CMAKE_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/core/include)
 set(OUTPUT_DIR "${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
@@ -13,7 +13,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 
 
 # Include files that should be compiled.
-file(GLOB_RECURSE SRC "Core/src/*.cpp" "Core/src/*.h" "Demo/src/*.cpp" "Demo/src/*.h")
+file(GLOB_RECURSE SRC "core/src/*.cpp" "core/src/*.h" "demo/src/*.cpp" "demo/src/*.h")
 
 message(STATUS "Add source files:")
 foreach(SRC_FILE IN LISTS SRC)
@@ -28,10 +28,10 @@ find_package(SDL2 REQUIRED)
 # Include SDL2 and include directory
 target_include_directories(
     ${PROJECT_NAME}
-        PUBLIC Demo/include
-        PUBLIC Core/include/
-        PUBLIC Core/include/Graphics/
-        PUBLIC Core/include/Application/
+        PUBLIC demo/include
+        PUBLIC core/include/
+        PUBLIC core/include/Graphics/
+        PUBLIC core/include/Application/
         PUBLIC ${SDL2_INCLUDE_DIRS}
 )
 

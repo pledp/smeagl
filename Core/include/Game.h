@@ -5,13 +5,22 @@
 #include "App.h"
 
 class RendererBase;
+class App;
 
 class Game {
 public:
-    Game(App* application);
+    /**
+     * The game context.
+    */
+    Game();
     
     void Run();
     void End();
+
+    /**
+     * Sets createWindow to true, which makes Run() open a window.
+    */
+    void CreateWindow();
 
     void Update();
     void Render();
@@ -26,13 +35,15 @@ public:
      * @param graphics Pointer to a RendererBase object or object derived from RendererBase.
     */
     void SetGraphics(RendererBase* graphics);
+    void SetApp(App* app);
 
 private:
     RendererBase* graphics;
 
     App* application;
 
-    bool IsPlaying = false;
+    bool isPlaying = false;
+    bool createWindow = false;
 };
 
 #endif

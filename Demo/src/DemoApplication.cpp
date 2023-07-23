@@ -2,7 +2,7 @@
 #include <iostream>
 
 void DemoApplication::Init() {
-
+    std::cout << "Init";
 }
 
 void DemoApplication::Update() {
