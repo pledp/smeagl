@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.11)
 
 cmake_policy(SET CMP0079 NEW)
 
-project(SDL2Test)
+project(pledGL)
 
 # Add include path
 set(CMAKE_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/core/include)
@@ -25,9 +25,8 @@ message(STATUS "")
 
 add_executable(${PROJECT_NAME} ${SRC})
 
-add_subdirectory("lib")
+add_subdirectory("external")
 
-set(SDL2_DIR ${CMAKE_SOURCE_DIR}/lib/SDL)
 find_package(SDL2 REQUIRED)
 
 # Include SDL2 and include directory
