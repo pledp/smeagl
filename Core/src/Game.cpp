@@ -2,7 +2,6 @@
 #include <cmath>
 #include <SDL2/SDL.h>
 
-#include "SDLRenderer.h"
 #include "Game.h"
 
 Game::Game() {

@@ -1,8 +1,8 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "RendererBase.h"
-#include "App.h"
+#include "Graphics/RendererBase.h"
+#include "Application/App.h"
 
 class RendererBase;
 class App;

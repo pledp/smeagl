@@ -32,10 +32,8 @@ find_package(SDL2 REQUIRED)
 # Include SDL2 and include directory
 target_include_directories(
     ${PROJECT_NAME}
-        PUBLIC demo/include
+        PUBLIC demo/include/
         PUBLIC core/include/
-        PUBLIC core/include/Graphics/
-        PUBLIC core/include/Application/
         PUBLIC ${SDL2_INCLUDE_DIRS}
 )
 

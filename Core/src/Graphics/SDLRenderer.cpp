@@ -1,4 +1,4 @@
-#include "SDLRenderer.h"
+#include "Graphics/SDLRenderer.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cmath>

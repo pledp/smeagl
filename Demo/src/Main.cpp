@@ -1,6 +1,6 @@
 #include "DemoApplication.h"
 
-#include "SDLRenderer.h"
+#include "Graphics/SDLRenderer.h"
 #include "Game.h"
 
 #include <iostream>

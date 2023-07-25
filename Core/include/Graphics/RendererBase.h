@@ -4,6 +4,8 @@
 #include "Game.h"
 #include <SDL2/SDL.h>
 
+class Game;
+
 class RendererBase {
 protected:
     Game* game = nullptr;
