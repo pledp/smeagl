@@ -1,2 +1,2 @@
 # pledGL
-OpenGL and SDL2 tests and experiments.
+OpenGL game framework/engine experiments & learning experiences. 
