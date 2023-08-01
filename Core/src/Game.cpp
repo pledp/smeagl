@@ -4,8 +4,11 @@
 
 #include "Game.h"
 
+
+Game* Game::s_Instance = nullptr;
 Game::Game() {
     this->fps = 144;
+    s_Instance = this;
 }
 
 void Game::Init() {

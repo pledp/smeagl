@@ -37,9 +37,12 @@ public:
     void SetGraphics(RendererBase* graphics);
     void SetApp(App* app);
 
-private:
-    RendererBase* graphics;
+    static Game& GetGame() { return *s_Instance; }
 
+private:
+    static Game* s_Instance;
+
+    RendererBase* graphics;
     App* application;
 
     bool isPlaying = false;
