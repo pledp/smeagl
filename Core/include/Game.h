@@ -14,7 +14,7 @@ public:
     */
     Game();
     
-    void Run();
+    void Run(App* app);
     void End();
 
     /**

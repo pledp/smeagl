@@ -5,6 +5,8 @@
 
 class DemoApplication : public App {
     public:
+        DemoApplication(); 
+
         void Init() override;
         void Update() override;
         void Render() override;

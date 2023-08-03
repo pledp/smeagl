@@ -20,9 +20,7 @@ public:
     virtual void Loop() = 0;
  
     void SetGame(Game* game);
-
     // FPS cap time
-    int t;
 };
 
 #endif

@@ -7,7 +7,7 @@
 
 Game* Game::s_Instance = nullptr;
 Game::Game() {
-    this->fps = 144;
+    this->fps = 60;
     s_Instance = this;
 }
 
@@ -16,12 +16,13 @@ void Game::Init() {
     application->Init();
 }
 
-void Game::Run() {
+void Game::Run(App* app) {
+    SetApp(app);
+
     this->Init();
     this->isPlaying = true;
     
     while(this->isPlaying) {
-        ProcessInput();
         graphics->Loop();
     }
 }

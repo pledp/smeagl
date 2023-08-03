@@ -12,6 +12,9 @@ private:
     int width;
     int height;
 
+    uint64_t frameStart, frameTime;
+    float deltaTime;
+
 public:
     SDLRenderer();
 
