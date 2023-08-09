@@ -4,26 +4,22 @@
 #include "Graphics/SDLRenderer.h"
 #include "Game.h"
 
-Game game;
-
 DemoApplication::DemoApplication() {
-    Game* game = new Game();
     RendererBase* graphics = new SDLRenderer();
 
-    game->SetGraphics(graphics);
-    game->CreateWindow();
-    game->Run(this);
+    this->SetGraphics(graphics);
+    this->CreateWindow();
+    this->Run();
 
     delete graphics;
-    delete game;
 }
 
 void DemoApplication::Init() {
-    game = Game::GetGame();
+
 }
 
 void DemoApplication::Update() {
-    
+    std::cout << "Update";
 }
 
 void DemoApplication::Render() {

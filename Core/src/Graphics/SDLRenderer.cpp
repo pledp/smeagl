@@ -62,14 +62,13 @@ void SDLRenderer::Loop() {
 
     frameStart = SDL_GetTicks64();
     
-    game->ProcessInput();
-    game->Update();
-    game->Render();
+    game->Loop();
+
+    // TODO: Remove this line
+    Render();
 
     frameTime = SDL_GetTicks64() - frameStart;
     deltaTime = frameTime/1000.0f;
-
-    std::cout << deltaTime << " ";
 
     if(frameDelay > frameTime) {
         SDL_Delay(frameDelay - frameTime);

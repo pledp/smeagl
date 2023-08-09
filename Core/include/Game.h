@@ -14,7 +14,7 @@ public:
     */
     Game();
     
-    void Run(App* app);
+    void Run();
     void End();
 
     /**
@@ -22,9 +22,7 @@ public:
     */
     void CreateWindow();
 
-    void Update();
-    void Render();
-    void Init();
+    void Loop();
     void ProcessInput();
 
     int fps;
@@ -47,6 +45,10 @@ private:
 
     bool isPlaying = false;
     bool createWindow = false;
+
+    virtual void Update() = 0;
+    virtual void Render() = 0;
+    virtual void Init() = 0;
 };
 
 #endif

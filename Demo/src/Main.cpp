@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main(int argc, char *argv[]) {
-    App* application = new DemoApplication();
+    DemoApplication* application = new DemoApplication();
 
     delete application;
     std::cout << "ENDING!";

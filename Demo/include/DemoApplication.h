@@ -1,9 +1,9 @@
 #ifndef D_APPLICATION_H_
 #define D_APPLICATION_H_
 
-#include "Application/App.h"
+#include "Game.h"
 
-class DemoApplication : public App {
+class DemoApplication : public Game {
     public:
         DemoApplication(); 
 

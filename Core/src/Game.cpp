@@ -11,13 +11,9 @@ Game::Game() {
     s_Instance = this;
 }
 
-void Game::Init() {
+void Game::Run() {
     graphics->Init(this->createWindow);
-    application->Init();
-}
 
-void Game::Run(App* app) {
-    SetApp(app);
 
     this->Init();
     this->isPlaying = true;
@@ -27,13 +23,10 @@ void Game::Run(App* app) {
     }
 }
 
-void Game::Update() {
-    application->Update();
-}
-
-void Game::Render() {
-    application->Render();
-    graphics->Render();
+void Game::Loop() {
+    ProcessInput();
+    Update();
+    Render();
 }
 
 void Game::ProcessInput() {
