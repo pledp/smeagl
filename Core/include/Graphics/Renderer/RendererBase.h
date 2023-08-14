@@ -2,7 +2,6 @@
 #define RENDERER_BASE_H_
 
 #include "Game.h"
-#include <SDL2/SDL.h>
 
 class Game;
 

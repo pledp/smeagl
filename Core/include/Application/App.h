@@ -2,7 +2,7 @@
 #define APP_H_
 
 #include "Game.h"
-#include "Graphics/RendererBase.h"
+#include "Graphics/Renderer/RendererBase.h"
 
 class Game;
 class RendererBase;

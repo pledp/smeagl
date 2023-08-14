@@ -2,7 +2,7 @@
 #define SDL_RENDERER_H_
 
 #include <SDL2/SDL.h>
-#include "Graphics/RendererBase.h"
+#include "Graphics/Renderer/RendererBase.h"
 
 class SDLRenderer : public RendererBase  {
 private:

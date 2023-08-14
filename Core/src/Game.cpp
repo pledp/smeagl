@@ -7,6 +7,7 @@
 
 Game* Game::s_Instance = nullptr;
 Game::Game() {
+    this->createWindow = true;
     this->fps = 60;
     s_Instance = this;
 }
@@ -44,9 +45,5 @@ void Game::SetGraphics(RendererBase* graphics) {
 
 void Game::SetApp(App* app) {
     this->application = app;
-}
-
-void Game::CreateWindow() {
-    this->createWindow = true;
 }
 

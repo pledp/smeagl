@@ -15,7 +15,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 
 
 # Include files that should be compiled.
-file(GLOB_RECURSE SRC "core/src/*.cpp" "core/src/*.h" "demo/src/*.cpp" "demo/src/*.h")
+file(GLOB_RECURSE SRC "Core/src/*.cpp" "Core/src/*.h" "Demo/src/*.cpp" "Demo/src/*.h" "external/glad/*.c" "external/glad/*.h")
 
 message(STATUS "Add source files:")
 foreach(SRC_FILE IN LISTS SRC)
@@ -32,8 +32,9 @@ find_package(SDL2 REQUIRED)
 # Include SDL2 and include directory
 target_include_directories(
     ${PROJECT_NAME}
-        PUBLIC demo/include/
-        PUBLIC core/include/
+        PUBLIC Demo/include/
+        PUBLIC Core/include/
+        PUBLIC external/glad/include/
         PUBLIC ${SDL2_INCLUDE_DIRS}
 )
 

@@ -5,7 +5,6 @@ DemoApplication::DemoApplication() {
     this->graphics = new SDLRenderer();
 
     this->SetGraphics(graphics);
-    this->CreateWindow();
 }
 
 void DemoApplication::Init() {

@@ -1,7 +1,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "Graphics/RendererBase.h"
+#include "Graphics/Renderer/RendererBase.h"
 #include "Application/App.h"
 
 class RendererBase;
@@ -20,8 +20,6 @@ public:
     /**
      * Sets createWindow to true, which makes Run() open a window.
     */
-    void CreateWindow();
-
     void Loop();
     void ProcessInput();
 

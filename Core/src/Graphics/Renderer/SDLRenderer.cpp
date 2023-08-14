@@ -1,7 +1,11 @@
-#include "Graphics/SDLRenderer.h"
+#include "Graphics/Renderer/SDLRenderer.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cmath>
+
+#include "glad/glad.h"
+
+SDL_GLContext context;
 
 SDLRenderer::SDLRenderer() {
 
@@ -14,9 +18,12 @@ void SDLRenderer::Init(bool createWindow) {
     SDL_Init(SDL_INIT_EVERYTHING);
 
     if(createWindow)
-        window = SDL_CreateWindow("SDL2 Window", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,680, 480,0);
+        window = SDL_CreateWindow("pledGL", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 680, 480, SDL_WINDOW_OPENGL);
 
+    context = SDL_GL_CreateContext(window);
     renderer = SDL_CreateRenderer(window, -1, 0);
+
+    gladLoadGLLoader(SDL_GL_GetProcAddress);
 
     SDL_Surface* surface = NULL;
 
@@ -25,6 +32,7 @@ void SDLRenderer::Init(bool createWindow) {
 
 void SDLRenderer::Exit() {
     SDL_DestroyWindow(window);
+    SDL_GL_DeleteContext(context);
     SDL_Quit();
 
     window = NULL; 
@@ -32,14 +40,10 @@ void SDLRenderer::Exit() {
 }
 
 void SDLRenderer::Render() {
-    // Set color to white
-    SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
 
-    // Clear renderer 
-    SDL_RenderClear(renderer);
-
-    // Update screen with renderer
-    SDL_RenderPresent(renderer);
+    SDL_GL_SwapWindow(window);
 }
 
 void SDLRenderer::ProcessInput() {
