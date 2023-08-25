@@ -15,11 +15,7 @@ public:
     void Run();
     void End();
 
-    /**
-     * Sets createWindow to true, which makes Run() open a window.
-    */
     void Loop();
-    void ProcessInput();
 
     int fps;
 
@@ -28,14 +24,16 @@ public:
      * 
      * @param graphics Pointer to a RendererBase object or object derived from RendererBase.
     */
-    void SetGraphics(RendererBase* graphics);
+    void SetRenderer(RendererBase* graphics);
 
     static Game& GetGame() { return *s_Instance; }
 
 private:
     static Game* s_Instance;
 
-    RendererBase* graphics;
+    void ProcessInput();
+
+    RendererBase* renderer;
 
     bool isPlaying = false;
     bool createWindow = false;

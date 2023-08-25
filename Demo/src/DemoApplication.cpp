@@ -4,7 +4,7 @@
 DemoApplication::DemoApplication() {
     this->graphics = new SDLRenderer();
 
-    this->SetGraphics(graphics);
+    this->SetRenderer(graphics);
 }
 
 void DemoApplication::Init() {

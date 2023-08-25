@@ -13,14 +13,14 @@ Game::Game() {
 }
 
 void Game::Run() {
-    graphics->Init(this->createWindow);
+    renderer->Init(this->createWindow);
 
 
     this->Init();
     this->isPlaying = true;
     
     while(this->isPlaying) {
-        graphics->Loop();
+        renderer->Loop();
     }
 }
 
@@ -31,15 +31,15 @@ void Game::Loop() {
 }
 
 void Game::ProcessInput() {
-    graphics->ProcessInput();
+    renderer->ProcessInput();
 }
 
 void Game::End() {
     this->isPlaying = false;
 }
 
-void Game::SetGraphics(RendererBase* graphics) {
-    this->graphics = graphics;
-    this->graphics->SetGame(this);
+void Game::SetRenderer(RendererBase* renderer) {
+    this->renderer = renderer;
+    this->renderer->SetGame(this);
 }
 
