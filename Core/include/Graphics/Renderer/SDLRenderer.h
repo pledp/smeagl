@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 #include "Graphics/Renderer/Renderer.h"
 
-class SDLRenderer : public Renderer  {
+class SDLRenderer : public Renderer {
 private:
     SDL_Window *window = nullptr;
     SDL_Renderer *renderer = nullptr;
@@ -13,6 +13,7 @@ private:
     int height;
 
     uint64_t frameStart, frameTime;
+    int frameDelay;
     float deltaTime;
 
 public:
@@ -22,7 +23,8 @@ public:
     void Exit() override;
     void Render() override;
     void ProcessInput() override;
-    void Loop() override;
+    void StartLoop(int fps) override;
+    void EndLoop() override;
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "glad/glad.h"
+#include "Game.h"
 
 SDL_GLContext context;
 
@@ -52,7 +53,7 @@ void SDLRenderer::ProcessInput() {
         switch(e.type) {
             case SDL_QUIT:
                 Exit();
-                game->End();
+                Game::End();
                 break;
             case SDL_WINDOWEVENT:
                 std::cout << "Moved window";
@@ -61,16 +62,13 @@ void SDLRenderer::ProcessInput() {
     } 
 }
 
-void SDLRenderer::Loop() {
-    int frameDelay = 1000.0f / game->fps;
-
+void SDLRenderer::StartLoop(int fps) {
+    frameDelay = 1000.0f / 60;
     frameStart = SDL_GetTicks64();
-    
-    game->Loop();
-
+}
+void SDLRenderer::EndLoop() {
     // TODO: Remove this line
     Render();
-
     frameTime = SDL_GetTicks64() - frameStart;
     deltaTime = frameTime/1000.0f;
 

@@ -1,9 +1,8 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+#include "Graphics/Renderer/RendererAPI.h"
 #include "Graphics/Renderer/Renderer.h"
-
-class Renderer;
 
 class Game {
 public:
@@ -11,9 +10,10 @@ public:
      * The game context.
     */
     Game();
+    ~Game();
     
     void Run();
-    void End();
+    static void End();
 
     void Loop();
 
@@ -24,7 +24,7 @@ public:
      * 
      * @param graphics Pointer to a Renderer object or object derived from Renderer.
     */
-    void SetRenderer(Renderer* graphics);
+    void SetRenderer(RendererAPI::API graphics);
 
     static Game& GetGame() { return *s_Instance; }
 

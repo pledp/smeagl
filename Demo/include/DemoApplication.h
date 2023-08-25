@@ -2,7 +2,6 @@
 #define D_APPLICATION_H_
 
 #include "Game.h"
-#include "Graphics/Renderer/SDLRenderer.h"
 
 class DemoApplication : public Game {
     public:

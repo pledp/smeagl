@@ -3,13 +3,16 @@
 #include <SDL2/SDL.h>
 
 #include "Game.h"
-
+#include "Graphics/Renderer/SDLRenderer.h"
 
 Game* Game::s_Instance = nullptr;
 Game::Game() {
     this->createWindow = true;
     this->fps = 60;
     s_Instance = this;
+}
+Game::~Game() {
+    delete renderer;
 }
 
 void Game::Run() {
@@ -20,8 +23,16 @@ void Game::Run() {
     this->isPlaying = true;
     
     while(this->isPlaying) {
-        renderer->Loop();
+        // Start the frame
+        renderer->StartLoop(this->fps);
+        this->Loop();
+
+        // End the frame and add delay if required
+        renderer->EndLoop();
     }
+}
+void Game::End() {
+    s_Instance->isPlaying = false;
 }
 
 void Game::Loop() {
@@ -34,12 +45,11 @@ void Game::ProcessInput() {
     renderer->ProcessInput();
 }
 
-void Game::End() {
-    this->isPlaying = false;
+void Game::SetRenderer(RendererAPI::API renderer) {
+    switch(renderer) {
+        case RendererAPI::API::SDL: this->renderer = new SDLRenderer();
+    }
 }
 
-void Game::SetRenderer(Renderer* renderer) {
-    this->renderer = renderer;
-    this->renderer->SetGame(this);
-}
+
 

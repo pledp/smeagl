@@ -1,10 +1,10 @@
 #include "DemoApplication.h"
 #include <iostream>
 
-DemoApplication::DemoApplication() {
-    this->graphics = new SDLRenderer();
+#include "Graphics/Renderer/RendererAPI.h"
 
-    this->SetRenderer(graphics);
+DemoApplication::DemoApplication() {
+    this->SetRenderer(RendererAPI::API::SDL);
 }
 
 void DemoApplication::Init() {
