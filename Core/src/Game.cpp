@@ -43,7 +43,3 @@ void Game::SetGraphics(RendererBase* graphics) {
     this->graphics->SetGame(this);
 }
 
-void Game::SetApp(App* app) {
-    this->application = app;
-}
-
