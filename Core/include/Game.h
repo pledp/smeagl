@@ -1,9 +1,9 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "Graphics/Renderer/RendererBase.h"
+#include "Graphics/Renderer/Renderer.h"
 
-class RendererBase;
+class Renderer;
 
 class Game {
 public:
@@ -22,9 +22,9 @@ public:
     /**
      * Sets the graphics pipeline of the program.
      * 
-     * @param graphics Pointer to a RendererBase object or object derived from RendererBase.
+     * @param graphics Pointer to a Renderer object or object derived from Renderer.
     */
-    void SetRenderer(RendererBase* graphics);
+    void SetRenderer(Renderer* graphics);
 
     static Game& GetGame() { return *s_Instance; }
 
@@ -33,7 +33,7 @@ private:
 
     void ProcessInput();
 
-    RendererBase* renderer;
+    Renderer* renderer;
 
     bool isPlaying = false;
     bool createWindow = false;

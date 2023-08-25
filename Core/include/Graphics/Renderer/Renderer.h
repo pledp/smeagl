@@ -5,12 +5,12 @@
 
 class Game;
 
-class RendererBase {
+class Renderer {
 protected:
     Game* game = nullptr;
 
 public:
-    virtual ~RendererBase() {};
+    virtual ~Renderer() {};
 
     virtual void Init(bool createWindow) = 0;
     virtual void Exit() = 0;

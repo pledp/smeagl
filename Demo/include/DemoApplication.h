@@ -14,7 +14,7 @@ class DemoApplication : public Game {
         void Render() override;
 
     private: 
-        RendererBase* graphics = nullptr;
+        Renderer* graphics = nullptr;
 };
 
 #endif

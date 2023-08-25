@@ -38,7 +38,7 @@ void Game::End() {
     this->isPlaying = false;
 }
 
-void Game::SetRenderer(RendererBase* renderer) {
+void Game::SetRenderer(Renderer* renderer) {
     this->renderer = renderer;
     this->renderer->SetGame(this);
 }

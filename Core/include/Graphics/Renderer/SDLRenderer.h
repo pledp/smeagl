@@ -2,9 +2,9 @@
 #define SDL_RENDERER_H_
 
 #include <SDL2/SDL.h>
-#include "Graphics/Renderer/RendererBase.h"
+#include "Graphics/Renderer/Renderer.h"
 
-class SDLRenderer : public RendererBase  {
+class SDLRenderer : public Renderer  {
 private:
     SDL_Window *window = nullptr;
     SDL_Renderer *renderer = nullptr;
