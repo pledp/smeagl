@@ -53,7 +53,7 @@ void SDLRenderer::ProcessInput() {
         switch(e.type) {
             case SDL_QUIT:
                 Exit();
-                Game::End();
+                Game::GetGame().End();
                 break;
             case SDL_WINDOWEVENT:
                 std::cout << "Moved window";

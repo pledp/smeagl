@@ -32,7 +32,7 @@ void Game::Run() {
     }
 }
 void Game::End() {
-    s_Instance->isPlaying = false;
+    this->isPlaying = false;
 }
 
 void Game::Loop() {

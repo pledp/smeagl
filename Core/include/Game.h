@@ -13,19 +13,13 @@ public:
     ~Game();
     
     void Run();
-    static void End();
+    void End();
 
     void Loop();
 
     int fps;
 
-    /**
-     * Sets the graphics pipeline of the program.
-     * 
-     * @param graphics Pointer to a Renderer object or object derived from Renderer.
-    */
     void SetRenderer(RendererAPI::API graphics);
-
     static Game& GetGame() { return *s_Instance; }
 
 private:
