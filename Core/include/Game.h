@@ -19,7 +19,7 @@ public:
 
     int fps;
 
-    void SetRenderer(RendererAPI::API graphics);
+    void SetRenderer(RendererAPI::API api);
     static Game& GetGame() { return *s_Instance; }
 
 private:

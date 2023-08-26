@@ -45,8 +45,9 @@ void Game::ProcessInput() {
     renderer->ProcessInput();
 }
 
-void Game::SetRenderer(RendererAPI::API renderer) {
-    switch(renderer) {
+//TODO: Move this function to different class so Game doesn't have any direct dependency to SDLRenderer, only to Renderer
+void Game::SetRenderer(RendererAPI::API api) {
+    switch(api) {
         case RendererAPI::API::SDL: this->renderer = new SDLRenderer();
     }
 }
