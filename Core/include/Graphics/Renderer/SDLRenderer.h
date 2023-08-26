@@ -22,7 +22,7 @@ public:
     void Init(bool createWindow) override;
     void Exit() override;
     void Render() override;
-    void ProcessInput() override;
+    void ProcessInput(GameBase* context) override;
     void StartLoop(int fps) override;
     void EndLoop() override;
 };

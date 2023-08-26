@@ -3,8 +3,9 @@
 
 #include "Graphics/Renderer/RendererAPI.h"
 #include "Graphics/Renderer/Renderer.h"
+#include "Application/GameBase.h"
 
-class Game {
+class Game : public GameBase {
 public:
     /**
      * The game context.
@@ -12,8 +13,8 @@ public:
     Game();
     ~Game();
     
-    void Run();
-    void End();
+    void Run() override;
+    void End() override;
 
     void Loop();
 
@@ -32,9 +33,9 @@ private:
     bool isPlaying = false;
     bool createWindow = false;
 
+    virtual void Init() = 0;
     virtual void Update() = 0;
     virtual void Render() = 0;
-    virtual void Init() = 0;
 };
 
 #endif

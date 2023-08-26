@@ -1,6 +1,8 @@
 #ifndef RENDERER_BASE_H_
 #define RENDERER_BASE_H_
 
+class GameBase;
+
 class Renderer {
 public:
     virtual ~Renderer() {};
@@ -8,7 +10,7 @@ public:
     virtual void Init(bool createWindow) = 0;
     virtual void Exit() = 0;
     virtual void Render() = 0;
-    virtual void ProcessInput() = 0;
+    virtual void ProcessInput(GameBase* context) = 0;
     virtual void StartLoop(int fps) = 0;
     virtual void EndLoop() = 0;
 };

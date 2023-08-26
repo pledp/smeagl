@@ -2,7 +2,7 @@
 #include <cmath>
 #include <SDL2/SDL.h>
 
-#include "Game.h"
+#include "Application/Game.h"
 #include "Graphics/Renderer/SDLRenderer.h"
 
 Game* Game::s_Instance = nullptr;
@@ -42,7 +42,7 @@ void Game::Loop() {
 }
 
 void Game::ProcessInput() {
-    renderer->ProcessInput();
+    renderer->ProcessInput(this);
 }
 
 //TODO: Move this function to different class so Game doesn't have any direct dependency to SDLRenderer, only to Renderer

@@ -1,7 +1,7 @@
 #ifndef D_APPLICATION_H_
 #define D_APPLICATION_H_
 
-#include "Game.h"
+#include "Application/Game.h"
 
 class DemoApplication : public Game {
     public:

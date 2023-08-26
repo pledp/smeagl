@@ -4,7 +4,7 @@
 #include <cmath>
 
 #include "glad/glad.h"
-#include "Game.h"
+#include "Application/GameBase.h"
 
 SDL_GLContext context;
 
@@ -47,13 +47,13 @@ void SDLRenderer::Render() {
     SDL_GL_SwapWindow(window);
 }
 
-void SDLRenderer::ProcessInput() {
+void SDLRenderer::ProcessInput(GameBase* context) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         switch(e.type) {
             case SDL_QUIT:
                 Exit();
-                Game::GetGame().End();
+                context->End();
                 break;
             case SDL_WINDOWEVENT:
                 std::cout << "Moved window";
