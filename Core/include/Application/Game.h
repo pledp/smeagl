@@ -28,7 +28,7 @@ private:
 
     void ProcessInput();
 
-    Renderer* renderer;
+    Renderer* renderer = nullptr;
 
     bool isPlaying = false;
     bool createWindow = false;

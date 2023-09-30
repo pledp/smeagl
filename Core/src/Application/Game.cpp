@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-#include <SDL2/SDL.h>
 
 #include "Application/Game.h"
 #include "Graphics/Renderer/SDLRenderer.h"
@@ -16,8 +15,11 @@ Game::~Game() {
 }
 
 void Game::Run() {
-    renderer->Init(this->createWindow);
+    if(!this->renderer) {
+        this->SetRenderer(RendererAPI::API::SDL);
+    }
 
+    renderer->Init(this->createWindow);
 
     this->Init();
     this->isPlaying = true;

@@ -4,7 +4,7 @@
 #include "Graphics/Renderer/RendererAPI.h"
 
 DemoApplication::DemoApplication() {
-    this->SetRenderer(RendererAPI::API::SDL);
+    
 }
 
 void DemoApplication::Init() {
