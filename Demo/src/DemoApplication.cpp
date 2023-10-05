@@ -1,7 +1,7 @@
 #include "DemoApplication.h"
 #include <iostream>
 
-#include "Graphics/Renderer/RendererAPI.h"
+#include "Graphics/GraphicsAPI.h"
 
 DemoApplication::DemoApplication() {
     

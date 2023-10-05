@@ -2,7 +2,7 @@
 #include <cmath>
 
 #include "Application/Game.h"
-#include "Graphics/Renderer/SDLRenderer.h"
+#include "Graphics/GraphicsAPI.h"
 
 Game* Game::s_Instance = nullptr;
 Game::Game() {
@@ -16,7 +16,7 @@ Game::~Game() {
 
 void Game::Run() {
     if(!this->renderer) {
-        this->SetRenderer(RendererAPI::API::SDL);
+        this->SetRenderer(GraphicsAPI::API::SDL);
     }
 
     renderer->Init(this->createWindow);
@@ -47,11 +47,8 @@ void Game::ProcessInput() {
     renderer->ProcessInput(this);
 }
 
-//TODO: Move this function to different class so Game doesn't have any direct dependency to SDLRenderer, only to Renderer
-void Game::SetRenderer(RendererAPI::API api) {
-    switch(api) {
-        case RendererAPI::API::SDL: this->renderer = new SDLRenderer();
-    }
+void Game::SetRenderer(GraphicsAPI::API api) {
+    renderer = GraphicsAPI::SetRenderer(api);
 }
 
 

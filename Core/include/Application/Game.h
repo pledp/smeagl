@@ -1,7 +1,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "Graphics/Renderer/RendererAPI.h"
+#include "Graphics/GraphicsAPI.h"
 #include "Graphics/Renderer/Renderer.h"
 #include "Application/GameBase.h"
 
@@ -20,7 +20,7 @@ public:
 
     int fps;
 
-    void SetRenderer(RendererAPI::API api);
+    void SetRenderer(GraphicsAPI::API api);
     static Game& GetGame() { return *s_Instance; }
 
 private:
