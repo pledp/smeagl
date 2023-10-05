@@ -12,10 +12,23 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 
 # Set output directory of EXE file.
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
-
+file(GLOB_RECURSE LIBSRC "Core/src/*.cpp" "Core/src/*.h" "external/glad/*.c" "external/glad/*.h")
+add_library(pledGLcore SHARED ${LIBSRC})
+target_include_directories(
+    pledGLcore
+        PUBLIC Core/include/
+        PUBLIC external/glad/include/
+        PUBLIC ${SDL2_INCLUDE_DIRS}
+)
+target_link_libraries(
+    pledGLcore
+        mingw32
+        SDL2main
+        SDL2
+)
 
 # Include files that should be compiled.
-file(GLOB_RECURSE SRC "Core/src/*.cpp" "Core/src/*.h" "Demo/src/*.cpp" "Demo/src/*.h" "external/glad/*.c" "external/glad/*.h")
+file(GLOB_RECURSE SRC "Demo/src/*.cpp" "Demo/src/*.h")
 
 message(STATUS "Add source files:")
 foreach(SRC_FILE IN LISTS SRC)
@@ -34,16 +47,10 @@ target_include_directories(
     ${PROJECT_NAME}
         PUBLIC Demo/include/
         PUBLIC Core/include/
-        PUBLIC external/glad/include/
-        PUBLIC ${SDL2_INCLUDE_DIRS}
 )
-
-# Link SDL and mingw
 target_link_libraries(
     ${PROJECT_NAME}
-        mingw32
-        SDL2main
-        SDL2
+        pledGLcore
 )
 
 # Copy assets to executable's directory
