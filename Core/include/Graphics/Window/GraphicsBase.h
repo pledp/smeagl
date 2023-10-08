@@ -3,9 +3,9 @@
 
 class GameBase;
 
-class Renderer {
+class GraphicsBase {
 public:
-    virtual ~Renderer() {};
+    virtual ~GraphicsBase() {};
 
     virtual void Init(bool createWindow) = 0;
     virtual void Exit() = 0;

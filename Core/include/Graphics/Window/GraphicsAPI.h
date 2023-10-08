@@ -1,7 +1,7 @@
 #ifndef GRAPHICS_API_H_
 #define GRAPHICS_API_H_
 
-#include "Graphics/Renderer/Renderer.h"
+#include "Graphics/Window/GraphicsBase.h"
 
 class GraphicsAPI  {
 public:
@@ -10,7 +10,7 @@ public:
         None = 0, SDL = 1, OpenGL = 2
     };
 
-    static Renderer* SetRenderer(API api);
+    static GraphicsBase* SetRenderer(API api);
 
 };
 

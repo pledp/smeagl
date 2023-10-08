@@ -1,8 +1,8 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "Graphics/GraphicsAPI.h"
-#include "Graphics/Renderer/Renderer.h"
+#include "Graphics/Window/GraphicsAPI.h"
+#include "Graphics/Window/GraphicsBase.h"
 #include "Application/GameBase.h"
 
 class Game : public GameBase {
@@ -28,7 +28,7 @@ private:
 
     void ProcessInput();
 
-    Renderer* renderer = nullptr;
+    GraphicsBase* renderer = nullptr;
 
     bool isPlaying = false;
     bool createWindow = false;

@@ -1,4 +1,4 @@
-#include "Graphics/Renderer/SDLRenderer.h"
+#include "Graphics/Window/SDLGraphics.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cmath>
@@ -8,11 +8,11 @@
 
 SDL_GLContext context;
 
-SDLRenderer::SDLRenderer() {
+SDLGraphics::SDLGraphics() {
 
 }
 
-void SDLRenderer::Init(bool createWindow) {
+void SDLGraphics::Init(bool createWindow) {
     this->width = 1024;
     this->height = 768;
 
@@ -31,7 +31,7 @@ void SDLRenderer::Init(bool createWindow) {
     std::cout << "Window created!";
 }
 
-void SDLRenderer::Exit() {
+void SDLGraphics::Exit() {
     SDL_DestroyWindow(window);
     SDL_GL_DeleteContext(context);
     SDL_Quit();
@@ -40,14 +40,14 @@ void SDLRenderer::Exit() {
     renderer = NULL;
 }
 
-void SDLRenderer::Render() {
+void SDLGraphics::Render() {
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     SDL_GL_SwapWindow(window);
 }
 
-void SDLRenderer::ProcessInput(GameBase* context) {
+void SDLGraphics::ProcessInput(GameBase* context) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         switch(e.type) {
@@ -62,11 +62,11 @@ void SDLRenderer::ProcessInput(GameBase* context) {
     } 
 }
 
-void SDLRenderer::StartLoop(int fps) {
+void SDLGraphics::StartLoop(int fps) {
     frameDelay = 1000.0f / 60;
     frameStart = SDL_GetTicks64();
 }
-void SDLRenderer::EndLoop() {
+void SDLGraphics::EndLoop() {
     // TODO: Remove this line
     Render();
     frameTime = SDL_GetTicks64() - frameStart;

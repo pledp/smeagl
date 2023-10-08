@@ -2,7 +2,7 @@
 #include <cmath>
 
 #include "Application/Game.h"
-#include "Graphics/GraphicsAPI.h"
+#include "Graphics/Window/GraphicsAPI.h"
 
 Game* Game::s_Instance = nullptr;
 Game::Game() {

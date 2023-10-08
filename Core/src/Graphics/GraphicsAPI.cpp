@@ -1,8 +1,8 @@
-#include "Graphics/GraphicsAPI.h"
-#include "Graphics/Renderer/SDLRenderer.h"
+#include "Graphics/Window/GraphicsAPI.h"
+#include "Graphics/Window/SDLGraphics.h"
 
-Renderer* GraphicsAPI::SetRenderer(API api) {
+GraphicsBase* GraphicsAPI::SetRenderer(API api) {
     switch(api) {
-        case API::SDL: return new SDLRenderer();
+        case API::SDL: return new SDLGraphics();
     }
 }

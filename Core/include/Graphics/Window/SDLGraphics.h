@@ -2,9 +2,9 @@
 #define SDL_RENDERER_H_
 
 #include <SDL2/SDL.h>
-#include "Graphics/Renderer/Renderer.h"
+#include "Graphics/Window/GraphicsBase.h"
 
-class SDLRenderer : public Renderer {
+class SDLGraphics : public GraphicsBase {
 private:
     SDL_Window *window = nullptr;
     SDL_Renderer *renderer = nullptr;
@@ -17,7 +17,7 @@ private:
     float deltaTime;
 
 public:
-    SDLRenderer();
+    SDLGraphics();
 
     void Init(bool createWindow) override;
     void Exit() override;
