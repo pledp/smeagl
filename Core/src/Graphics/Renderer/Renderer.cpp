@@ -4,23 +4,32 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include <string>
+#include "Graphics/Renderer/ShaderProgram.h"
 
-const char* vertexShaderSource = R"(
-#version 330 core
-layout(location = 0) in vec3 aPos;
-uniform mat4 model;
-void main() {
-    gl_Position = model * vec4(aPos, 1.0);
-}
-)";
+const std::string vertexShaderSource =
+"#version 330 core\n"
+"\n"
+"layout(location = 0) in vec3 aPos;"
+"\n"
+"uniform mat4 model;"
+"\n"
+"void main() {"
+"\n"
+"   gl_Position = model * vec4(aPos, 1.0);"
+"\n"
+"}\n";
 
-const char* fragmentShaderSource = R"(
-#version 330 core
-out vec4 FragColor;
-void main() {
-    FragColor = vec4(1.0, 0.0, 0.0, 1.0); // Red color
-}
-)";
+const std::string fragmentShaderSource = 
+"#version 330 core\n"
+"\n"
+"layout(location = 0) out vec4 FragColor;"
+"\n"
+"void main() {"
+"\n"
+"   FragColor = vec4(1.0, 0.0, 0.0, 1.0);"
+"\n"
+"}\n";
 
 struct RendererData {
     unsigned int TriVertexArray; 
@@ -28,11 +37,7 @@ struct RendererData {
     unsigned int TriIndicesArray;
     unsigned int TriIndicesBuffer; 
 
-
-    unsigned int TriVertShader;
-    unsigned int TriFragShader;
-
-    unsigned int ShaderProgram;
+    ShaderProgram Program;
 
     glm::vec3 TriVertexPosistions[3];
     unsigned int TriIndicesPosistions[3];
@@ -41,19 +46,8 @@ struct RendererData {
 static RendererData s_Data;
 
 void Renderer::Init() {
-    s_Data.TriVertShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(s_Data.TriVertShader, 1, &vertexShaderSource, NULL);
-    glCompileShader(s_Data.TriVertShader);
-
-    s_Data.TriFragShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(s_Data.TriFragShader, 1, &fragmentShaderSource, NULL);
-    glCompileShader(s_Data.TriFragShader);
-
-    s_Data.ShaderProgram = glCreateProgram();
-    glAttachShader(s_Data.ShaderProgram, s_Data.TriVertShader);
-    glAttachShader(s_Data.ShaderProgram, s_Data.TriFragShader);
-    glLinkProgram(s_Data.ShaderProgram);
-    glUseProgram(s_Data.ShaderProgram);
+    s_Data.Program.CreateProgram(vertexShaderSource, fragmentShaderSource);
+    s_Data.Program.BindProgram();
 
     glGenVertexArrays(1, &s_Data.TriVertexArray);
     glBindVertexArray(s_Data.TriVertexArray);
@@ -80,7 +74,9 @@ void Renderer::Init() {
 void Renderer::DrawTri(pledGL::Vector3 pos) {
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(pos.x, pos.y, pos.z));
-    glUniformMatrix4fv(glGetUniformLocation(s_Data.ShaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+
+    s_Data.Program.UploadUniformMat4("model", model);
+    
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 }
 
