@@ -6,31 +6,36 @@
 
 Game* Game::s_Instance = nullptr;
 Game::Game() {
-    this->createWindow = true;
-    this->fps = 60;
     s_Instance = this;
 }
 Game::~Game() {
-    delete renderer;
+    delete graphics;
+}
+
+void Game::initRun() {
+    createWindow = true;
+    fps = 60;
+
+    // If graphics isn't set, set it to SDL.
+    if(!this->graphics) {
+        this->SetGraphics(GraphicsAPI::API::SDL);
+    }
+    graphics->Init(this->createWindow);
+    Renderer::Init();
 }
 
 void Game::Run() {
-    if(!this->renderer) {
-        this->SetRenderer(GraphicsAPI::API::SDL);
-    }
+    initRun();
 
-    renderer->Init(this->createWindow);
-
-    this->Init();
-    this->isPlaying = true;
-    
+    Init();
+    this->isPlaying = true;    
     while(this->isPlaying) {
         // Start the frame
-        renderer->StartLoop(this->fps);
+        graphics->StartLoop(this->fps);
         this->Loop();
 
         // End the frame and add delay if required
-        renderer->EndLoop();
+        graphics->EndLoop();
     }
 }
 void Game::End() {
@@ -44,11 +49,11 @@ void Game::Loop() {
 }
 
 void Game::ProcessInput() {
-    renderer->ProcessInput(this);
+    this->graphics->ProcessInput(this);
 }
 
-void Game::SetRenderer(GraphicsAPI::API api) {
-    renderer = GraphicsAPI::SetRenderer(api);
+void Game::SetGraphics(GraphicsAPI::API api) {
+    this->graphics = GraphicsAPI::SetRenderer(api);
 }
 
 

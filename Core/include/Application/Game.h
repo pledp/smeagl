@@ -4,6 +4,7 @@
 #include "Graphics/Window/GraphicsAPI.h"
 #include "Graphics/Window/GraphicsBase.h"
 #include "Application/GameBase.h"
+#include "Graphics/Renderer/Renderer.h"
 
 class Game : public GameBase {
 public:
@@ -20,15 +21,17 @@ public:
 
     int fps;
 
-    void SetRenderer(GraphicsAPI::API api);
+    void SetGraphics(GraphicsAPI::API api);
     static Game& GetGame() { return *s_Instance; }
 
 private:
     static Game* s_Instance;
 
     void ProcessInput();
+    void initRun();
 
-    GraphicsBase* renderer = nullptr;
+    Renderer* renderer = nullptr;
+    GraphicsBase* graphics = nullptr;
 
     bool isPlaying = false;
     bool createWindow = false;
