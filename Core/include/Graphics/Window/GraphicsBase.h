@@ -9,7 +9,7 @@ public:
 
     virtual void Init(bool createWindow) = 0;
     virtual void Exit() = 0;
-    virtual void Render() = 0;
+    virtual void Flush() = 0;
     virtual void ProcessInput(GameBase* context) = 0;
     virtual void StartLoop(int fps) = 0;
     virtual void EndLoop() = 0;

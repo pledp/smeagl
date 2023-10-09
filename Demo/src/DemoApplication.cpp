@@ -1,7 +1,7 @@
 #include "DemoApplication.h"
 #include <iostream>
 
-#include "Graphics/Window/GraphicsAPI.h"
+#include "Graphics/Renderer/Renderer.h"
 
 DemoApplication::DemoApplication() {
     
@@ -16,7 +16,9 @@ void DemoApplication::Update() {
 }
 
 void DemoApplication::Render() {
-
+    Renderer::ClearScreen();
+    Renderer::DrawTri({0.2f, 0.5f,0.0f});
+    Renderer::DrawTri({0.2f, -0.5f,0.0f});
 }
 
 DemoApplication::~DemoApplication() {

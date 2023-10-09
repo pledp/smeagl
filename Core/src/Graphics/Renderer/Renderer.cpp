@@ -1,13 +1,16 @@
 #include "Graphics/Renderer/Renderer.h"
 #include "glad/glad.h"
-#include <iostream>
-#include <memory>
+
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 const char* vertexShaderSource = R"(
 #version 330 core
 layout(location = 0) in vec3 aPos;
+uniform mat4 model;
 void main() {
-    gl_Position = vec4(aPos, 1.0);
+    gl_Position = model * vec4(aPos, 1.0);
 }
 )";
 
@@ -30,6 +33,9 @@ struct RendererData {
     unsigned int TriFragShader;
 
     unsigned int ShaderProgram;
+
+    glm::vec3 TriVertexPosistions[3];
+    unsigned int TriIndicesPosistions[3];
 };
 
 static RendererData s_Data;
@@ -52,13 +58,37 @@ void Renderer::Init() {
     glGenVertexArrays(1, &s_Data.TriVertexArray);
     glBindVertexArray(s_Data.TriVertexArray);
 
+    s_Data.TriVertexPosistions[0] = { -0.5f, -0.5f, 0.0f }; 
+    s_Data.TriVertexPosistions[1] = { 0.5f, -0.5f, 0.0f }; 
+    s_Data.TriVertexPosistions[2] = { 0.0f, 0.5f, 0.0f }; 
+    s_Data.TriIndicesPosistions[0] = 0;
+    s_Data.TriIndicesPosistions[1] = 1;
+    s_Data.TriIndicesPosistions[2] = 2;
+
     glGenBuffers(1, &s_Data.TriVertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, s_Data.TriVertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, 3*sizeof(glm::vec3), s_Data.TriVertexPosistions, GL_STATIC_DRAW);
 
-    float triVertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f
-    }
+    glGenBuffers(1, &s_Data.TriIndicesBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_Data.TriIndicesBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3*sizeof(glm::vec3), s_Data.TriIndicesPosistions, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+}
+
+void Renderer::DrawTri(pledGL::Vector3 pos) {
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(pos.x, pos.y, pos.z));
+    glUniformMatrix4fv(glGetUniformLocation(s_Data.ShaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+}
+
+void Renderer::ClearScreen() {
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void Renderer::flush() {
     
 }

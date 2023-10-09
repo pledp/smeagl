@@ -21,7 +21,7 @@ public:
 
     void Init(bool createWindow) override;
     void Exit() override;
-    void Render() override;
+    void Flush() override;
     void ProcessInput(GameBase* context) override;
     void StartLoop(int fps) override;
     void EndLoop() override;

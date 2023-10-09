@@ -46,6 +46,7 @@ void Game::Loop() {
     ProcessInput();
     Update();
     Render();
+    graphics->Flush();
 }
 
 void Game::ProcessInput() {

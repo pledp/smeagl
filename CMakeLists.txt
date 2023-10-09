@@ -18,6 +18,7 @@ target_include_directories(
     pledGLcore
         PUBLIC Core/include/
         PUBLIC external/glad/include/
+        PUBLIC external/glm/
         PUBLIC ${SDL2_INCLUDE_DIRS}
 )
 target_link_libraries(
