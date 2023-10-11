@@ -6,6 +6,7 @@
 #include "glm/gtc/type_ptr.hpp"
 #include <string>
 #include "Graphics/Renderer/ShaderProgram.h"
+#include <iostream>
 
 const std::string vertexShaderSource =
 "#version 330 core\n"
@@ -31,6 +32,10 @@ const std::string fragmentShaderSource =
 "\n"
 "}\n";
 
+struct QuadVertex {
+    glm::vec3 pos;
+};
+
 struct RendererData {
     unsigned int TriVertexArray; 
     unsigned int TriVertexBuffer; 
@@ -39,36 +44,52 @@ struct RendererData {
 
     ShaderProgram Program;
 
-    glm::vec3 TriVertexPosistions[3];
+    QuadVertex* TriVertexBufferBase = nullptr;
+    QuadVertex* TriVertexBufferPtr = nullptr;
     unsigned int TriIndicesPosistions[3];
 };
 
 static RendererData s_Data;
 
 void Renderer::Init() {
+    s_Data.TriVertexBufferBase = new QuadVertex[3];
     s_Data.Program.CreateProgram(vertexShaderSource, fragmentShaderSource);
     s_Data.Program.BindProgram();
 
+    s_Data.TriVertexBufferPtr = s_Data.TriVertexBufferBase;
+
     glGenVertexArrays(1, &s_Data.TriVertexArray);
     glBindVertexArray(s_Data.TriVertexArray);
+    
+    s_Data.TriVertexBufferPtr->pos = glm::vec3(-0.5f, -0.5f, 0.0f);
+    s_Data.TriVertexBufferPtr++;
+    s_Data.TriVertexBufferPtr->pos = glm::vec3(0.5f, -0.5f, 0.0f);
+    s_Data.TriVertexBufferPtr++;
+    s_Data.TriVertexBufferPtr->pos = glm::vec3(0.0f, 0.5f, 0.0f);
 
-    s_Data.TriVertexPosistions[0] = { -0.5f, -0.5f, 0.0f }; 
-    s_Data.TriVertexPosistions[1] = { 0.5f, -0.5f, 0.0f }; 
-    s_Data.TriVertexPosistions[2] = { 0.0f, 0.5f, 0.0f }; 
     s_Data.TriIndicesPosistions[0] = 0;
     s_Data.TriIndicesPosistions[1] = 1;
     s_Data.TriIndicesPosistions[2] = 2;
+    
+    // Find the size of the buffer.
+    uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.TriVertexBufferPtr -(uint8_t*)s_Data.TriVertexBufferBase);
+    std::cout << dataSize;
 
     glGenBuffers(1, &s_Data.TriVertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, s_Data.TriVertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, 3*sizeof(glm::vec3), s_Data.TriVertexPosistions, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, dataSize, s_Data.TriVertexBufferBase, GL_STATIC_DRAW);
 
     glGenBuffers(1, &s_Data.TriIndicesBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_Data.TriIndicesBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3*sizeof(glm::vec3), s_Data.TriIndicesPosistions, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3*sizeof(unsigned int), s_Data.TriIndicesPosistions, GL_STATIC_DRAW);
+    
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(QuadVertex), (void*)0);
     glEnableVertexAttribArray(0);
+}
+
+void Renderer::Exit() {
+    delete[] s_Data.TriVertexBufferBase;
+    s_Data.TriVertexBufferPtr = nullptr;
 }
 
 void Renderer::DrawTri(pledGL::Vector3 pos) {

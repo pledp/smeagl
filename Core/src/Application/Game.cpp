@@ -40,6 +40,8 @@ void Game::Run() {
 }
 void Game::End() {
     this->isPlaying = false;
+    graphics->Exit();
+    Renderer::Exit();
 }
 
 void Game::Loop() {

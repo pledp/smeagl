@@ -50,7 +50,6 @@ void SDLGraphics::ProcessInput(GameBase* context) {
     while (SDL_PollEvent(&e)) {
         switch(e.type) {
             case SDL_QUIT:
-                Exit();
                 context->End();
                 break;
             case SDL_WINDOWEVENT:

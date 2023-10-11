@@ -3,7 +3,7 @@
 #include <memory>
 #include <iostream>
 
-// Creates a program for openGL
+// Creates a program (Application that runs on the GPU, in this case with our shaders)
 void ShaderProgram::CreateProgram(const std::string& vertSource, const std::string& fragSource) {
     uint32_t program = glCreateProgram();
     uint32_t vertShader = createShader(vertSource, GL_VERTEX_SHADER);
@@ -13,6 +13,10 @@ void ShaderProgram::CreateProgram(const std::string& vertSource, const std::stri
     glAttachShader(program, fragShader);
 
     glLinkProgram(program);
+
+    // Delete now unnecessary shaders
+    glDeleteShader(vertShader);
+    glDeleteShader(fragShader);
 
     mProgramID = program;
 }
@@ -32,6 +36,7 @@ void ShaderProgram::BindProgram() {
     glUseProgram(mProgramID);
 }
 
+// Upload a uniform to the shader
 void ShaderProgram::UploadUniformMat4(const std::string& name, const glm::mat4 matrix) {
     GLint location = glGetUniformLocation(mProgramID, name.c_str());
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));

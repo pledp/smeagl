@@ -9,6 +9,7 @@ private:
 
 public:
     static void Init();
+    static void Exit();
 
     static void StartScene();
     static void EndScene();
