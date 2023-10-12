@@ -1,17 +1,21 @@
+#include <string>
 #include "Graphics/Renderer/Renderer.h"
-#include "glad/glad.h"
+#include "Graphics/Renderer/ShaderProgram.h"
 
+#include "glad/glad.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
-#include <string>
-#include "Graphics/Renderer/ShaderProgram.h"
-#include <iostream>
 
 const std::string vertexShaderSource =
 "#version 330 core\n"
 "\n"
 "layout(location = 0) in vec3 aPos;"
+"\n"
+"layout(location = 1) in vec3 aColor;"
+"\n"
+"out vec3 color;"
 "\n"
 "uniform mat4 model;"
 "\n"
@@ -19,21 +23,26 @@ const std::string vertexShaderSource =
 "\n"
 "   gl_Position = model * vec4(aPos, 1.0);"
 "\n"
+"   color = aColor;"
+"\n"
 "}\n";
 
 const std::string fragmentShaderSource = 
 "#version 330 core\n"
 "\n"
+"in vec3 color;"
+"\n"
 "layout(location = 0) out vec4 FragColor;"
 "\n"
 "void main() {"
 "\n"
-"   FragColor = vec4(1.0, 0.0, 0.0, 1.0);"
+"   FragColor = vec4(color, 1.0);"
 "\n"
 "}\n";
 
 struct QuadVertex {
     glm::vec3 pos;
+    glm::vec3 color;
 };
 
 struct RendererData {
@@ -62,10 +71,15 @@ void Renderer::Init() {
     glBindVertexArray(s_Data.TriVertexArray);
     
     s_Data.TriVertexBufferPtr->pos = glm::vec3(-0.5f, -0.5f, 0.0f);
+    s_Data.TriVertexBufferPtr->color = glm::vec3(1.0f, 0.0f, 0.0f);
     s_Data.TriVertexBufferPtr++;
     s_Data.TriVertexBufferPtr->pos = glm::vec3(0.5f, -0.5f, 0.0f);
+    s_Data.TriVertexBufferPtr->color = glm::vec3(0.0f, 1.0f, 0.0f);
     s_Data.TriVertexBufferPtr++;
     s_Data.TriVertexBufferPtr->pos = glm::vec3(0.0f, 0.5f, 0.0f);
+    s_Data.TriVertexBufferPtr->color = glm::vec3(0.0f, 0.0f, 1.0f);
+    s_Data.TriVertexBufferPtr++;
+
 
     s_Data.TriIndicesPosistions[0] = 0;
     s_Data.TriIndicesPosistions[1] = 1;
@@ -73,7 +87,6 @@ void Renderer::Init() {
     
     // Find the size of the buffer.
     uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.TriVertexBufferPtr -(uint8_t*)s_Data.TriVertexBufferBase);
-    std::cout << dataSize;
 
     glGenBuffers(1, &s_Data.TriVertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, s_Data.TriVertexBuffer);
@@ -85,6 +98,8 @@ void Renderer::Init() {
     
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(QuadVertex), (void*)0);
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(QuadVertex), (void*)offsetof(QuadVertex, color));
+    glEnableVertexAttribArray(1);
 }
 
 void Renderer::Exit() {
@@ -93,8 +108,8 @@ void Renderer::Exit() {
 }
 
 void Renderer::DrawTri(pledGL::Vector3 pos) {
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(pos.x, pos.y, pos.z));
+    glm::vec3 vec = glm::vec3(pos.x, pos.y, pos.z);
+    glm::mat4 model = glm::scale(glm::mat4(1.0f), vec);
 
     s_Data.Program.UploadUniformMat4("model", model);
     

@@ -20,7 +20,7 @@ void SDLGraphics::Init(bool createWindow) {
     SDL_Init(SDL_INIT_EVERYTHING);
 
     if(createWindow)
-        window = SDL_CreateWindow("pledGL", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 680, 480, SDL_WINDOW_OPENGL);
+        window = SDL_CreateWindow("pledGL", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 
     context = SDL_GL_CreateContext(window);
     renderer = SDL_CreateRenderer(window, -1, 0);
