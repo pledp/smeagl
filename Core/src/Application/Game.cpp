@@ -12,36 +12,46 @@ Game::~Game() {
     delete graphics;
 }
 
+void Game::Run() {
+    initRun();
+
+    Init();
+    this->isPlaying = true;
+
+    // Main loop
+    while(this->isPlaying) {
+        // Start the frame
+        graphics->StartLoop(fps);
+        Loop();
+
+        // End the frame and add delay if required
+        graphics->EndLoop(this);
+    }
+}
+void Game::End() {
+    isPlaying = false;
+    graphics->Exit();
+    Renderer::Exit();
+}
+
+void Game::SetGraphics(GraphicsAPI::API api) {
+    graphics = GraphicsAPI::SetRenderer(api);
+}
+
+void Game::SetFps(int newFps) {
+    fps = newFps;
+}
+
 void Game::initRun() {
     createWindow = true;
     fps = 60;
 
     // If graphics isn't set, set it to SDL.
-    if(!this->graphics) {
-        this->SetGraphics(GraphicsAPI::API::SDL);
+    if(!graphics) {
+        SetGraphics(GraphicsAPI::API::SDL);
     }
-    graphics->Init(this->createWindow);
+    graphics->Init(createWindow);
     Renderer::Init();
-}
-
-void Game::Run() {
-    initRun();
-
-    Init();
-    this->isPlaying = true;    
-    while(this->isPlaying) {
-        // Start the frame
-        graphics->StartLoop(this->fps);
-        this->Loop();
-
-        // End the frame and add delay if required
-        graphics->EndLoop();
-    }
-}
-void Game::End() {
-    this->isPlaying = false;
-    graphics->Exit();
-    Renderer::Exit();
 }
 
 void Game::Loop() {
@@ -49,15 +59,11 @@ void Game::Loop() {
     Update();
     Render();
     graphics->Flush();
+    //graphics->UpdateTime(this);
 }
 
 void Game::ProcessInput() {
-    this->graphics->ProcessInput(this);
+    graphics->ProcessInput(this);
 }
-
-void Game::SetGraphics(GraphicsAPI::API api) {
-    this->graphics = GraphicsAPI::SetRenderer(api);
-}
-
 
 

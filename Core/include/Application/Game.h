@@ -17,24 +17,29 @@ public:
     void Run() override;
     void End() override;
 
+    void SetFps(int NewFps) override;
+
     void Loop();
 
-    int fps;
-
     void SetGraphics(GraphicsAPI::API api);
+
+    // Get singelton object
     static Game& GetGame() { return *s_Instance; }
 
 private:
+    // Singleton object
     static Game* s_Instance;
-
-    void ProcessInput();
-    void initRun();
 
     Renderer* renderer = nullptr;
     GraphicsBase* graphics = nullptr;
 
     bool isPlaying = false;
     bool createWindow = false;
+
+    int fps;
+
+    void ProcessInput();
+    void initRun();
 
     virtual void Init() = 0;
     virtual void Update() = 0;

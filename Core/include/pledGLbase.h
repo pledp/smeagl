@@ -3,9 +3,7 @@
 
 namespace pledGL {
     struct Vector3 {
-        float x;
-        float y;
-        float z;
+        float x, y, z;
     };
 }
 

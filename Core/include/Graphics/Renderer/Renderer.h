@@ -15,6 +15,7 @@ public:
     static void EndScene();
 
     static void DrawTri(pledGL::Vector3);
+    static void DrawTri(pledGL::Vector3 pos, pledGL::Vector3 size);
     static void ClearScreen();
 };
 

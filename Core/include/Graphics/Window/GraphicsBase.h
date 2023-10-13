@@ -12,7 +12,7 @@ public:
     virtual void Flush() = 0;
     virtual void ProcessInput(GameBase* context) = 0;
     virtual void StartLoop(int fps) = 0;
-    virtual void EndLoop() = 0;
+    virtual void EndLoop(GameBase* context) = 0;
 };
 
 #endif

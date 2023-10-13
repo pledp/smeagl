@@ -60,14 +60,23 @@ void SDLGraphics::ProcessInput(GameBase* context) {
 }
 
 void SDLGraphics::StartLoop(int fps) {
-    frameDelay = 1000.0f / 60;
+    start_time = std::chrono::high_resolution_clock::now();
+    frameDelay = 1000.0f / fps;
     frameStart = SDL_GetTicks64();
 }
-void SDLGraphics::EndLoop() {
+void SDLGraphics::EndLoop(GameBase* context) {
     frameTime = SDL_GetTicks64() - frameStart;
     deltaTime = frameTime/1000.0f;
 
     if(frameDelay > frameTime) {
         SDL_Delay(frameDelay - frameTime);
     }
+
+    // TODO: Move this shit to a proper class
+    std::chrono::high_resolution_clock::time_point end_time = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed_seconds = std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time);
+    float time = static_cast<float>(elapsed_seconds.count());
+
+    context->TotalTimeElapsedSeconds += time;
+    std::cout << time;
 }

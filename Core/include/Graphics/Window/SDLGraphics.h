@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include "Graphics/Window/GraphicsBase.h"
+#include <chrono>
 
 class SDLGraphics : public GraphicsBase {
 private:
@@ -15,6 +16,9 @@ private:
     uint64_t frameStart, frameTime;
     int frameDelay;
     float deltaTime;
+    int frame = 0;
+
+    std::chrono::high_resolution_clock::time_point start_time;
 
 public:
     SDLGraphics();
@@ -24,7 +28,7 @@ public:
     void Flush() override;
     void ProcessInput(GameBase* context) override;
     void StartLoop(int fps) override;
-    void EndLoop() override;
+    void EndLoop(GameBase* context) override;
 };
 
 #endif

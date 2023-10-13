@@ -107,11 +107,10 @@ void Renderer::Exit() {
     s_Data.TriVertexBufferPtr = nullptr;
 }
 
-void Renderer::DrawTri(pledGL::Vector3 pos) {
-    glm::vec3 vec = glm::vec3(pos.x, pos.y, pos.z);
-    glm::mat4 model = glm::scale(glm::mat4(1.0f), vec);
+void Renderer::DrawTri(pledGL::Vector3 pos, pledGL::Vector3 size) {
+    glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(pos.x, pos.y, pos.z)) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, size.z));
 
-    s_Data.Program.UploadUniformMat4("model", model);
+    s_Data.Program.UploadUniformMat4("model", transform);
     
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 }
