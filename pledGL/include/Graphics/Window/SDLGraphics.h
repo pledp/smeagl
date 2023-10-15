@@ -1,8 +1,10 @@
 #ifndef SDL_RENDERER_H_
 #define SDL_RENDERER_H_
 
-#include <SDL2/SDL.h>
 #include "Graphics/Window/GraphicsBase.h"
+#include "Core/Timer.h"
+
+#include <SDL2/SDL.h>
 #include <chrono>
 
 class SDLGraphics : public GraphicsBase {
@@ -18,7 +20,7 @@ private:
     float deltaTime;
     int frame = 0;
 
-    std::chrono::high_resolution_clock::time_point start_time;
+    Timer frameTimer;
 
 public:
     SDLGraphics();

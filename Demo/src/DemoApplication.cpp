@@ -3,6 +3,8 @@
 #include <cmath>
 
 #include "Graphics/Renderer/Renderer.h"
+#include "Core/Timer.h"
+
 float indent = 0.0f;
 float size = 0.0f;
 
@@ -11,6 +13,9 @@ DemoApplication::DemoApplication() {
 }
 
 void DemoApplication::Init() {
+    Timer timer;
+    timer.StartTimer();
+    std::cout << timer.CurrentTimeInSeconds<float>();
 }
 
 void DemoApplication::Update() {
