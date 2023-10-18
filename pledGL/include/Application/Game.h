@@ -5,6 +5,9 @@
 #include "Graphics/Window/GraphicsBase.h"
 #include "Application/GameBase.h"
 #include "Graphics/Renderer/Renderer.h"
+#include "Core/Timer.h"
+
+#include <cstdint>
 
 class Game : public GameBase {
 public:
@@ -30,6 +33,11 @@ private:
     // Singleton object
     static Game* s_Instance;
 
+
+    uint64_t frameStart, frameTime;
+    uint64_t frameDelay;
+    Timer frameTimer;
+
     Renderer* renderer = nullptr;
     GraphicsBase* graphics = nullptr;
 
@@ -40,6 +48,8 @@ private:
 
     void ProcessInput();
     void initRun();
+    void StartLoop();
+    void EndLoop();
 
     virtual void Init() = 0;
     virtual void Update() = 0;

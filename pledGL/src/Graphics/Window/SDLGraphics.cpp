@@ -59,20 +59,6 @@ void SDLGraphics::ProcessInput(GameBase* context) {
     } 
 }
 
-void SDLGraphics::StartLoop(int fps) {
-    frameTimer.StartTimer();
-    frameDelay = 1000.0f / fps;
-    frameStart = frameTimer.CurrentTimeInMilliseconds<uint64_t>();
-}
-void SDLGraphics::EndLoop(GameBase* context) {
-    //TODO: Move all except SDL_Delay() to game class, create StartLoop and EndLoop in game class.
-    frameTime = frameTimer.CurrentTimeInMilliseconds<uint64_t>() - frameStart;
-
-    if(frameDelay > frameTime) {
-        SDL_Delay(frameDelay - frameTime);
-    }
-
-    float time = frameTimer.CurrentTimeInSeconds<float>();
-
-    context->TotalTimeElapsedSeconds += time;
+void SDLGraphics::AddDelay(uint64_t delay) {
+    SDL_Delay(delay);
 }

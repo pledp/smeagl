@@ -21,13 +21,32 @@ void Game::Run() {
     // Main loop
     while(this->isPlaying) {
         // Start the frame
-        graphics->StartLoop(fps);
+        StartLoop();
+
         Loop();
 
         // End the frame and add delay if required
-        graphics->EndLoop(this);
+        EndLoop();
     }
 }
+
+void Game::StartLoop() {
+    frameTimer.StartTimer();
+    frameDelay = 1000.0f / fps;
+    frameStart = frameTimer.CurrentTimeInMilliseconds<uint64_t>();
+}
+void Game::EndLoop() {
+    frameTime = frameTimer.CurrentTimeInMilliseconds<uint64_t>() - frameStart;
+
+    if(frameDelay > frameTime) {
+        graphics->AddDelay(frameDelay-frameTime);
+    }
+
+    float time = frameTimer.CurrentTimeInSeconds<float>();
+
+    TotalTimeElapsedSeconds += time;
+}
+
 void Game::End() {
     isPlaying = false;
     graphics->Exit();

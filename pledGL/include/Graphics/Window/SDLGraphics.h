@@ -14,14 +14,6 @@ private:
 
     int width;
     int height;
-
-    uint64_t frameStart, frameTime;
-    int frameDelay;
-    float deltaTime;
-    int frame = 0;
-
-    Timer frameTimer;
-
 public:
     SDLGraphics();
 
@@ -29,8 +21,7 @@ public:
     void Exit() override;
     void Flush() override;
     void ProcessInput(GameBase* context) override;
-    void StartLoop(int fps) override;
-    void EndLoop(GameBase* context) override;
+    void AddDelay(uint64_t delay) override;
 };
 
 #endif
