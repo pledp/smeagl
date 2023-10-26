@@ -11,11 +11,11 @@ public:
     static void Init();
     static void Exit();
 
-    static void StartScene();
-    static void EndScene();
+    static void StartDraw();
+    static void EndDraw();
 
     static void DrawTri(pledGL::Vector3);
-    static void DrawTri(pledGL::Vector3 pos, pledGL::Vector3 size);
+    static void DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color);
     static void ClearScreen();
 };
 
