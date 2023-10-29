@@ -63,7 +63,7 @@ void Game::SetFps(int newFps) {
 
 void Game::initRun() {
     createWindow = true;
-    fps = 144;
+    fps = 60;
 
     // If graphics isn't set, set it to SDL.
     if(!graphics) {

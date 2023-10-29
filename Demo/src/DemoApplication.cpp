@@ -24,7 +24,7 @@ void DemoApplication::Update() {
 }
 
 void DemoApplication::Render() {
-    Renderer::ClearScreen();
+    Renderer::ClearScreen({1.0f, 1.0f, 1.0f});
 
     Renderer::StartDraw();
     Renderer::DrawTri({0.0f, 0.0f, 0.0f}, {size, size, 0.0f}, {1.0f, 0.0f, 0.0f});
