@@ -41,7 +41,6 @@ add_executable(${PROJECT_NAME} ${SRC})
 
 add_subdirectory("external")
 
-find_package(SDL2 REQUIRED)
 
 # Include SDL2 and include directory
 target_include_directories(

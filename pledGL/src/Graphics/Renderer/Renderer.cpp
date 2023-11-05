@@ -66,7 +66,7 @@ static RendererData s_Data;
 
 void Renderer::Init() {
     uint32_t maxIndices = 1024;
-    s_Data.TriVertexBufferBase = new TriVertex[1000];
+    s_Data.TriVertexBufferBase = new TriVertex[10000];
     s_Data.Program.CreateProgram(vertexShaderSource, fragmentShaderSource);
     s_Data.Program.BindProgram();
 
@@ -96,7 +96,7 @@ void Renderer::Init() {
     }
     
     
-    s_Data.TriVertexBuffer = std::make_shared<VertexBuffer>(1000);
+    s_Data.TriVertexBuffer = std::make_shared<VertexBuffer>(10000);
 
     glGenBuffers(1, &s_Data.TriIndicesBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_Data.TriIndicesBuffer);
@@ -126,7 +126,6 @@ void Renderer::flush() {
     uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.TriVertexBufferPtr -(uint8_t*)s_Data.TriVertexBufferBase);
     s_Data.TriVertexBuffer->SetData(s_Data.TriVertexBufferBase, dataSize);
     glDrawElements(GL_TRIANGLES, s_Data.TriIndexCount, GL_UNSIGNED_INT, nullptr);
-    glGetError();
 }
 
 void Renderer::DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color) {
