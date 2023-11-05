@@ -3,6 +3,7 @@
 
 #include "Application/Game.h"
 #include "Graphics/Window/GraphicsAPI.h"
+#include "Core/Input/Keyboard.h"
 
 Game* Game::s_Instance = nullptr;
 Game::Game() {
@@ -41,9 +42,9 @@ void Game::EndLoop() {
     if(frameDelay > frameTime) {
         graphics->AddDelay(frameDelay-frameTime);
     }
-
     float time = frameTimer.CurrentTimeInSeconds<float>();
 
+    DeltaTime = time;
     TotalTimeElapsedSeconds += time;
 }
 
@@ -63,20 +64,23 @@ void Game::SetFps(int newFps) {
 
 void Game::initRun() {
     createWindow = true;
-    fps = 240;
+    fps = 60;
 
     // If graphics isn't set, set it to SDL.
     if(!graphics) {
         SetGraphics(GraphicsAPI::API::SDL);
     }
     graphics->Init(createWindow);
+
+    Keyboard::Init();
     Renderer::Init();
 }
 
 void Game::Loop() {
     ProcessInput();
-    Update();
-    Render();
+    Keyboard::Update();
+    Update(DeltaTime);
+    Render(DeltaTime);
     graphics->Flush();
     //graphics->UpdateTime(this);
 }

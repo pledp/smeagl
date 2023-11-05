@@ -15,6 +15,7 @@ public:
 
     uint64_t TimeElapsedInMilliseconds = 0;
     float TotalTimeElapsedSeconds = 0;
+    float DeltaTime = 0;
 };
 
 #endif
