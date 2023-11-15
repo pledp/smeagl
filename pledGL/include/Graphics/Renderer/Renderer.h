@@ -16,6 +16,8 @@ public:
 
     static void DrawTri(pledGL::Vector3);
     static void DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color);
+    static void DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color);
+
     static void ClearScreen(pledGL::Vector3 col);
 };
 

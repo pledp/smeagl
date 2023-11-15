@@ -28,13 +28,22 @@ void DemoApplication::Update(float deltaTime) {
     if(Keyboard::GetKeyState(pledGL_key_RIGHT)) {
         xPos = xPos + 2.0f * deltaTime;
     }
+
+    if(Keyboard::GetKeyPressed(pledGL_key_A)) {
+        std::cout << "PRESSED!";
+    }
     //std::cout << TotalTimeElapsedSeconds << " ";
 
 }
 
 void DemoApplication::Render(float deltaTime) {
     Renderer::ClearScreen({1.0f, 1.0f, 1.0f});
-    
+
+    Renderer::StartDraw();
+
+    Renderer::DrawQuad({0.2f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
+    Renderer::EndDraw();
+
     Renderer::StartDraw();
     Renderer::DrawTri({xPos, 0.0f, 0.0f}, {size, size, 0.0f}, {1.0f, 0.0f, 0.0f});
     Renderer::DrawTri({0.0f, 0.0f, 0.0f}, {0.2f, 0.2f, 0.0f}, {0.0f, 1.0f, 0.0f});
@@ -43,7 +52,6 @@ void DemoApplication::Render(float deltaTime) {
     Renderer::StartDraw();
     Renderer::DrawTri({0.5f, 0.0f, 0.0f}, {size * 0.5f, size * 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f});
     Renderer::EndDraw();
-
 }
 
 DemoApplication::~DemoApplication() {

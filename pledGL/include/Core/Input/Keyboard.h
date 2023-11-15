@@ -8,6 +8,7 @@ public:
     static void Init();
     static void Update();
     static bool GetKeyState(int key);
+    static bool GetKeyPressed(int key);
 
 private:
     constexpr static const int s_KeyCount = 287;
@@ -15,6 +16,8 @@ private:
     static std::array<bool, s_KeyCount> s_KeysDown;
     static std::array<bool, s_KeyCount> s_KeysUp;
     static std::array<bool, s_KeyCount> s_Keys;
+    static std::array<bool, s_KeyCount> s_LastKeysState;
+
 };
 
 enum
