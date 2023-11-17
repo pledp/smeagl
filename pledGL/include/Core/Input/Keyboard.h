@@ -7,7 +7,19 @@ class Keyboard {
 public:
     static void Init();
     static void Update();
+
+    /**
+     * Get the state of a key.
+     * @param key The key.
+     * @return True if key is held down, false otherwise.
+    */
     static bool GetKeyState(int key);
+
+    /**
+     * Check if key is pressed.
+     * @param key The key.
+     * @return True if the key is down AND if it's previous state was up, false otherwise.
+    */
     static bool GetKeyPressed(int key);
 
 private:

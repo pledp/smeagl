@@ -2,6 +2,7 @@
 #define GAME_BASE_H_
 
 #include <cstdint>
+#include "Core/pledGL.h"
 
 class GameBase {
 public:
@@ -13,9 +14,7 @@ public:
 
     virtual void SetFps(int newFps) = 0;
 
-    uint64_t TimeElapsedInMilliseconds = 0;
-    float TotalTimeElapsedSeconds = 0;
-    float DeltaTime = 0;
+    GameTime GameTime;
 };
 
 #endif

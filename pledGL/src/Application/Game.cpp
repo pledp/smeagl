@@ -44,8 +44,8 @@ void Game::EndLoop() {
     }
     float time = frameTimer.CurrentTimeInSeconds<float>();
 
-    DeltaTime = time;
-    TotalTimeElapsedSeconds += time;
+    GameTime.DeltaTime = time;
+    GameTime.TotalTimeElapsedSeconds += time;
 }
 
 void Game::End() {
@@ -79,10 +79,9 @@ void Game::initRun() {
 void Game::Loop() {
     ProcessInput();
     Keyboard::Update();
-    Update(DeltaTime);
-    Render(DeltaTime);
+    Update();
+    Render();
     graphics->Flush();
-    //graphics->UpdateTime(this);
 }
 
 void Game::ProcessInput() {

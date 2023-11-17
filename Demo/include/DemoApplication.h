@@ -9,8 +9,8 @@ class DemoApplication : public Game {
         ~DemoApplication();
 
         void Init() override;
-        void Update(float deltaTime) override;
-        void Render(float deltaTime) override;
+        void Update() override;
+        void Render() override;
 
     private: 
         GraphicsBase* graphics = nullptr;
