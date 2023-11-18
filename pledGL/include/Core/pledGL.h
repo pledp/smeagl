@@ -3,10 +3,16 @@
 
 #include <cstdint>
 
-struct GameTime {
-    uint64_t TimeElapsedInMilliseconds = 0;
-    float TotalTimeElapsedSeconds = 0;
-    float DeltaTime = 0;
+namespace pledGL {
+    struct Vector3 {
+        float x, y, z;
+    };
+
+    struct GameTime {
+        uint64_t TimeElapsedInMilliseconds = 0;
+        float TotalTimeElapsedSeconds = 0;
+        float DeltaTime = 0;
+    };
 };
 
 #endif

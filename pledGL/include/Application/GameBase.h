@@ -14,7 +14,7 @@ public:
 
     virtual void SetFps(int newFps) = 0;
 
-    GameTime GameTime;
+    pledGL::GameTime GameTime;
 };
 
 #endif

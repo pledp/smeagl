@@ -19,6 +19,7 @@ target_include_directories(
         PUBLIC pledGL/include/
         PUBLIC external/glad/include/
         PUBLIC external/glm/
+        PUBLIC External/
         PUBLIC ${SDL2_INCLUDE_DIRS}
 )
 target_link_libraries(

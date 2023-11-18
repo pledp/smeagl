@@ -13,6 +13,8 @@ public:
     void BindProgram();
     void CreateProgram(const std::string& vertShader, const std::string& fragShader);
     void UploadUniformMat4(const std::string& name, const glm::mat4 matrix);
+    void UploadUniform1i(const std::string& name, const int value);
+
 
 private:
     uint32_t createShader(const std::string& shader, GLenum shaderType);
