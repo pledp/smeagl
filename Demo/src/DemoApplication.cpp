@@ -1,6 +1,7 @@
 #include "DemoApplication.h"
 #include <iostream>
 #include <cmath>
+#include <cstdlib>
 
 #include "Graphics/Renderer/Renderer.h"
 #include "Core/Timer.h"
@@ -41,7 +42,7 @@ void DemoApplication::Render() {
 
     Renderer::StartDraw();
 
-    Renderer::DrawQuad({0.2f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
+    Renderer::DrawQuad({0.0f + (std::abs(size) / 2), 0.0f + (1.0f / 2), 0.0f}, {std::abs(size), 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
     Renderer::EndDraw();
 
     Renderer::StartDraw();
