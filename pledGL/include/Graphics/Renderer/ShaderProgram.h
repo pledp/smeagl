@@ -15,10 +15,11 @@ public:
     void UploadUniformMat4(const std::string& name, const glm::mat4 matrix);
     void UploadUniform1i(const std::string& name, const int value);
 
+    uint32_t GetID() { return m_ProgramID; };
 
 private:
     uint32_t createShader(const std::string& shader, GLenum shaderType);
-    uint32_t mProgramID;
+    uint32_t m_ProgramID;
 };
 
 #endif

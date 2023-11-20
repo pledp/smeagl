@@ -11,6 +11,7 @@ public:
     void Bind();
     void SetData(const void* data, uint32_t size);
 
+    uint32_t GetID() { return m_RendererID; };
 private:
     uint32_t m_RendererID;
 };

@@ -12,6 +12,7 @@
 #include "Graphics/Renderer/Renderer.h"
 #include "Graphics/Renderer/ShaderProgram.h"
 #include "Graphics/Renderer/Buffer.h"
+#include "Graphics/Renderer/Texture2D.h"
 
 
 const std::string vertexShaderSource =
@@ -23,16 +24,23 @@ const std::string vertexShaderSource =
 "\n"
 "layout(location = 2) in vec2 aTexCoord;"
 "\n"
+"layout(location = 3) in float aTexIndex;"
+"\n"
 "out vec3 color;"
 "\n"
 "out vec2 TexCoord;"
+"\n"
+"out float TexIndex;"
 "\n"
 "void main() {"
 "\n"
 "   gl_Position = vec4(aPos, 1.0);"
 "\n"
 "   color = aColor;"
+"\n"
 "   TexCoord = aTexCoord;"
+"\n"
+"   TexIndex = aTexIndex;"
 "\n"
 "}\n";
 
@@ -43,13 +51,17 @@ const std::string fragmentShaderSource =
 "\n"
 "in vec2 TexCoord;"
 "\n"
-"uniform sampler2D texture1;"
+"in float TexIndex;"
+"\n"
+"uniform sampler2D u_Textures[2];"
 "\n"
 "layout(location = 0) out vec4 FragColor;"
 "\n"
 "void main() {"
 "\n"
-"   FragColor = texture(texture1, TexCoord);"
+"   int index = int(TexIndex);"
+"\n"
+"   FragColor = texture(u_Textures[index], TexCoord);"
 "\n"
 "}\n";
 
@@ -57,6 +69,7 @@ struct Vertex {
     glm::vec3 pos;
     glm::vec3 color;
     glm::vec2 texCoords;
+    float texIndex;
 };
 
 struct RendererData {
@@ -81,7 +94,7 @@ struct RendererData {
 
     glm::vec4 QuadVertPositions[4];
 
-    unsigned int texture;
+    float TextureIndex;
 };
 
 static RendererData s_Data;
@@ -146,6 +159,8 @@ void Renderer::Init() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texIndex));
 
 
 
@@ -167,30 +182,18 @@ void Renderer::Init() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texIndex));
 
-    glGenTextures(1, &s_Data.texture);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, s_Data.texture); 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    int width, height, nrChannels;
-    unsigned char *data = stbi_load("assets/pldpfp.png", &width, &height, &nrChannels, 0);
-    if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
+    auto loc = glGetUniformLocation(s_Data.Program.GetID(), "u_Textures");
+    int samplers[2] = { 0, 1 };
+    glUniform1iv(loc, 2, samplers);
 
-    s_Data.Program.UploadUniform1i("texture1", 0);
+    Texture2D texture("assets/pldpfp.png");
+    Texture2D texture2("assets/clowddrip.png");
     
-
-    glBindTexture(GL_TEXTURE_2D, s_Data.texture);
-    glActiveTexture(GL_TEXTURE0);
+    texture.Bind(0);
+    texture2.Bind(1);
 }
 
 void Renderer::Exit() {
@@ -214,7 +217,15 @@ void Renderer::EndDraw() {
 }
 
 void Renderer::flush() {
-    glBindTexture(GL_TEXTURE_2D, s_Data.texture);
+    if(s_Data.QuadIndexCount) {
+        uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.QuadVertexBufferPtr -(uint8_t*)s_Data.QuadVertexBufferBase);
+
+        s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
+        glBindVertexArray(s_Data.QuadVertexArray);
+
+
+        glDrawElements(GL_TRIANGLES, s_Data.QuadIndexCount, GL_UNSIGNED_INT, nullptr);
+    }
 
     if(s_Data.TriIndexCount) {
         uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.TriVertexBufferPtr -(uint8_t*)s_Data.TriVertexBufferBase);
@@ -224,16 +235,6 @@ void Renderer::flush() {
 
         glDrawElements(GL_TRIANGLES, s_Data.TriIndexCount, GL_UNSIGNED_INT, nullptr);
 
-    }
-
-    if(s_Data.QuadIndexCount) {
-        uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.QuadVertexBufferPtr -(uint8_t*)s_Data.QuadVertexBufferBase);
-
-        s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
-        glBindVertexArray(s_Data.QuadVertexArray);
-
-
-        glDrawElements(GL_TRIANGLES, s_Data.QuadIndexCount, GL_UNSIGNED_INT, nullptr);
     }
 }
 
@@ -248,6 +249,7 @@ void Renderer::DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size, 
         s_Data.TriVertexBufferPtr->pos = transform * s_Data.TriVertPositions[i];
         s_Data.TriVertexBufferPtr->color = glm::vec3(color.x, color.y, color.z);
         s_Data.TriVertexBufferPtr->texCoords = textureCoords[i];
+        s_Data.TriVertexBufferPtr->texIndex = 1.0f;
         s_Data.TriVertexBufferPtr++;
     }
 
@@ -264,6 +266,7 @@ void Renderer::DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size,
         s_Data.QuadVertexBufferPtr->pos = transform * s_Data.QuadVertPositions[i];
         s_Data.QuadVertexBufferPtr->color = glm::vec3(color.x, color.y, color.z);
         s_Data.QuadVertexBufferPtr->texCoords = textureCoords[i];
+        s_Data.QuadVertexBufferPtr->texIndex = 0.0f;
         s_Data.QuadVertexBufferPtr++;
     }
 

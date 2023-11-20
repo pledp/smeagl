@@ -18,7 +18,7 @@ void ShaderProgram::CreateProgram(const std::string& vertSource, const std::stri
     glDeleteShader(vertShader);
     glDeleteShader(fragShader);
 
-    mProgramID = program;
+    m_ProgramID = program;
 }
 
 // Creates a shader
@@ -33,16 +33,16 @@ uint32_t ShaderProgram::createShader(const std::string& source, GLenum shaderTyp
 }
 
 void ShaderProgram::BindProgram() {
-    glUseProgram(mProgramID);
+    glUseProgram(m_ProgramID);
 }
 
 // Upload a uniform to the shader
 void ShaderProgram::UploadUniformMat4(const std::string& name, const glm::mat4 matrix) {
-    GLint location = glGetUniformLocation(mProgramID, name.c_str());
+    GLint location = glGetUniformLocation(m_ProgramID, name.c_str());
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void ShaderProgram::UploadUniform1i(const std::string& name, const int value) {
-    GLint location = glGetUniformLocation(mProgramID, name.c_str());
+    GLint location = glGetUniformLocation(m_ProgramID, name.c_str());
     glUniform1i(location, value);
 }
