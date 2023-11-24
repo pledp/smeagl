@@ -14,57 +14,6 @@
 #include "Graphics/Renderer/Buffer.h"
 #include "Graphics/Renderer/Texture2D.h"
 
-
-const std::string vertexShaderSource =
-"#version 330 core\n"
-"\n"
-"layout(location = 0) in vec3 aPos;"
-"\n"
-"layout(location = 1) in vec3 aColor;"
-"\n"
-"layout(location = 2) in vec2 aTexCoord;"
-"\n"
-"layout(location = 3) in float aTexIndex;"
-"\n"
-"out vec3 color;"
-"\n"
-"out vec2 TexCoord;"
-"\n"
-"out float TexIndex;"
-"\n"
-"void main() {"
-"\n"
-"   gl_Position = vec4(aPos, 1.0);"
-"\n"
-"   color = aColor;"
-"\n"
-"   TexCoord = aTexCoord;"
-"\n"
-"   TexIndex = aTexIndex;"
-"\n"
-"}\n";
-
-const std::string fragmentShaderSource = 
-"#version 330 core\n"
-"\n"
-"in vec3 color;"
-"\n"
-"in vec2 TexCoord;"
-"\n"
-"in float TexIndex;"
-"\n"
-"uniform sampler2D u_Textures[2];"
-"\n"
-"layout(location = 0) out vec4 FragColor;"
-"\n"
-"void main() {"
-"\n"
-"   int index = int(TexIndex);"
-"\n"
-"   FragColor = texture(u_Textures[index], TexCoord);"
-"\n"
-"}\n";
-
 struct Vertex {
     glm::vec3 pos;
     glm::vec3 color;
@@ -102,7 +51,7 @@ static RendererData s_Data;
 void Renderer::Init() {
     uint32_t maxIndices = 1024;
 
-    s_Data.Program.CreateProgram(vertexShaderSource, fragmentShaderSource);
+    s_Data.Program.CreateProgram(std::string("assets/shaders/vert.shader"), std::string("assets/shaders/frag.shader"));
     s_Data.Program.BindProgram();
 
 

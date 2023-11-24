@@ -19,6 +19,7 @@ public:
 
 private:
     uint32_t createShader(const std::string& shader, GLenum shaderType);
+    std::string getShaderFromPath(const std::string& path);
     uint32_t m_ProgramID;
 };
 

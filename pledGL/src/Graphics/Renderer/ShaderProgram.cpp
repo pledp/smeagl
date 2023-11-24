@@ -1,11 +1,16 @@
 #include "Graphics/Renderer/ShaderProgram.h"
 #include <string>
+#include <fstream>
+#include <sstream>
 #include <memory>
 #include <iostream>
 
 // Creates a program (Application that runs on the GPU, in this case with our shaders)
-void ShaderProgram::CreateProgram(const std::string& vertSource, const std::string& fragSource) {
+void ShaderProgram::CreateProgram(const std::string& vertPath, const std::string& fragPath) {
     uint32_t program = glCreateProgram();
+    std::string vertSource = getShaderFromPath(vertPath);
+    std::string fragSource = getShaderFromPath(fragPath);
+
     uint32_t vertShader = createShader(vertSource, GL_VERTEX_SHADER);
     uint32_t fragShader = createShader(fragSource, GL_FRAGMENT_SHADER);
 
@@ -19,6 +24,9 @@ void ShaderProgram::CreateProgram(const std::string& vertSource, const std::stri
     glDeleteShader(fragShader);
 
     m_ProgramID = program;
+
+
+    std::cout << getShaderFromPath(std::string("assets/shaders/frag.shader"));
 }
 
 // Creates a shader
@@ -30,6 +38,18 @@ uint32_t ShaderProgram::createShader(const std::string& source, GLenum shaderTyp
     glCompileShader(id);
 
     return id;
+}
+
+std::string ShaderProgram::getShaderFromPath(const std::string& path) {
+    std::ifstream stream(path);
+    std::string line;
+    std::stringstream ss;
+
+    while(getline(stream, line)) {
+        ss << line << "\n";
+    }
+
+    return ss.str();
 }
 
 void ShaderProgram::BindProgram() {
