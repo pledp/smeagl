@@ -211,8 +211,13 @@ void Renderer::DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size,
 
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(pos.x, pos.y, pos.z)) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, size.z));
 
+    glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 1.0f));
+    glm::mat4 projectionMatrix = glm::ortho(-1.0f, 1.0f, -0.75f, 0.75f, -1.0f, 1.0f);
+    glm::mat4 vp = viewMatrix * projectionMatrix;
+
+
     for(int i = 0; i < quadVertCount; i++) {
-        s_Data.QuadVertexBufferPtr->pos = transform * s_Data.QuadVertPositions[i];
+        s_Data.QuadVertexBufferPtr->pos = vp * (transform * s_Data.QuadVertPositions[i]);
         s_Data.QuadVertexBufferPtr->color = glm::vec3(color.x, color.y, color.z);
         s_Data.QuadVertexBufferPtr->texCoords = textureCoords[i];
         s_Data.QuadVertexBufferPtr->texIndex = 0.0f;

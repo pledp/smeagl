@@ -11,5 +11,6 @@ layout(location = 0) out vec4 FragColor;
 void main() {
 
    int index = int(TexIndex);
-   FragColor = texture(u_Textures[index], TexCoord);
+   vec2 st = gl_FragCoord.xy / vec2(800, 600);
+   FragColor = texture(u_Textures[index], TexCoord) * vec4(color, 1.0);
 }
