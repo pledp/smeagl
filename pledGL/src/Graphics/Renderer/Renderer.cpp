@@ -1,3 +1,9 @@
+#include "Graphics/Renderer/Renderer.h"
+#include "Graphics/Renderer/ShaderProgram.h"
+#include "Graphics/Renderer/Buffer.h"
+#include "Graphics/Renderer/Texture2D.h"
+#include "Graphics/Renderer/UniformBuffer.h"
+
 #include <string>
 #include <iostream>
 #include <memory>
@@ -8,11 +14,6 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
-
-#include "Graphics/Renderer/Renderer.h"
-#include "Graphics/Renderer/ShaderProgram.h"
-#include "Graphics/Renderer/Buffer.h"
-#include "Graphics/Renderer/Texture2D.h"
 
 struct Vertex {
     glm::vec3 pos;
@@ -32,8 +33,7 @@ struct RendererData {
     glm::vec4 TriVertPositions[3];
 
     ShaderProgram Program;
-
-
+    
     unsigned int QuadVertexArray; 
     std::shared_ptr<VertexBuffer> QuadVertexBuffer; 
     unsigned int QuadIndicesBuffer;
@@ -44,6 +44,12 @@ struct RendererData {
     glm::vec4 QuadVertPositions[4];
 
     float TextureIndex;
+
+    struct CameraData {
+        glm::mat4 ViewProjection;
+    };
+    CameraData CameraBuffer;
+    UniformBuffer CameraUniformBuffer;
 };
 
 static RendererData s_Data;
@@ -101,7 +107,6 @@ void Renderer::Init() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_Data.TriIndicesBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, maxIndices*sizeof(uint32_t), triIndices, GL_STATIC_DRAW);
 
-    // Init shader parameters
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
     glEnableVertexAttribArray(1);
@@ -134,6 +139,15 @@ void Renderer::Init() {
     glEnableVertexAttribArray(3);
     glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texIndex));
 
+    glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 1.0f));
+    glm::mat4 projectionMatrix = glm::ortho(-1.0f, 1.0f, -0.75f, 0.75f, -1.0f, 1.0f);
+    glm::mat4 vp = viewMatrix * projectionMatrix;
+    s_Data.CameraBuffer.ViewProjection = vp;
+
+
+    s_Data.CameraUniformBuffer.CreateBuffer(sizeof(RendererData::CameraData), 0);
+    s_Data.CameraUniformBuffer.SetData(&s_Data.CameraBuffer, sizeof(s_Data.CameraBuffer), 0);
+    
     auto loc = glGetUniformLocation(s_Data.Program.GetID(), "u_Textures");
     int samplers[2] = { 0, 1 };
     glUniform1iv(loc, 2, samplers);
@@ -211,13 +225,8 @@ void Renderer::DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size,
 
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(pos.x, pos.y, pos.z)) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, size.z));
 
-    glm::mat4 viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 1.0f));
-    glm::mat4 projectionMatrix = glm::ortho(-1.0f, 1.0f, -0.75f, 0.75f, -1.0f, 1.0f);
-    glm::mat4 vp = viewMatrix * projectionMatrix;
-
-
     for(int i = 0; i < quadVertCount; i++) {
-        s_Data.QuadVertexBufferPtr->pos = vp * (transform * s_Data.QuadVertPositions[i]);
+        s_Data.QuadVertexBufferPtr->pos = transform * s_Data.QuadVertPositions[i];
         s_Data.QuadVertexBufferPtr->color = glm::vec3(color.x, color.y, color.z);
         s_Data.QuadVertexBufferPtr->texCoords = textureCoords[i];
         s_Data.QuadVertexBufferPtr->texIndex = 0.0f;
