@@ -1,4 +1,4 @@
-#include "Core/Input/Keyboard.h"
+#include "Input/Keyboard.h"
 #include <SDL2/SDL_keyboard.h>
 
 std::array<bool, Keyboard::s_KeyCount> Keyboard::s_KeysDown;

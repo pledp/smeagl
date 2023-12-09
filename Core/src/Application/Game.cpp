@@ -3,7 +3,7 @@
 
 #include "Application/Game.h"
 #include "Graphics/Window/GraphicsAPI.h"
-#include "Core/Input/Keyboard.h"
+#include "Input/Keyboard.h"
 
 Game* Game::s_Instance = nullptr;
 Game::Game() {

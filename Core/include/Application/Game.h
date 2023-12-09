@@ -5,7 +5,7 @@
 #include "Graphics/Window/GraphicsBase.h"
 #include "Application/GameBase.h"
 #include "Graphics/Renderer/Renderer.h"
-#include "Core/Timer.h"
+#include "Timer.h"
 
 #include <cstdint>
 

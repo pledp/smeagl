@@ -2,7 +2,7 @@
 #define GAME_BASE_H_
 
 #include <cstdint>
-#include "Core/pledGL.h"
+#include "pledGL.h"
 
 class GameBase {
 public:

@@ -4,8 +4,8 @@
 #include <cstdlib>
 
 #include "Graphics/Renderer/Renderer.h"
-#include "Core/Timer.h"
-#include "Core/Input/Keyboard.h"
+#include "Timer.h"
+#include "Input/Keyboard.h"
 
 float indent = 0.0f;
 float size = 0.0f;

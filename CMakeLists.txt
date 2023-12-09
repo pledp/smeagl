@@ -5,18 +5,18 @@ cmake_policy(SET CMP0079 NEW)
 project(pledGL)
 
 # Add include path
-set(CMAKE_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/core/include)
+set(CMAKE_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/Core/include)
 set(OUTPUT_DIR "${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 
 # Set output directory of EXE file.
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
-file(GLOB_RECURSE LIBSRC "pledGL/src/*.cpp" "pledGL/src/*.h" "external/glad/*.c" "external/glad/*.h")
+file(GLOB_RECURSE LIBSRC "Core/src/*.cpp" "Core/src/*.h" "external/glad/*.c" "external/glad/*.h")
 add_library(pledGL SHARED ${LIBSRC})
 target_include_directories(
     pledGL
-        PUBLIC pledGL/include/
+        PUBLIC Core/include/
         PUBLIC external/glad/include/
         PUBLIC external/glm/
         PUBLIC External/

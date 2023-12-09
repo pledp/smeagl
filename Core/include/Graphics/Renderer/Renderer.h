@@ -1,7 +1,7 @@
 #ifndef TWOD_RENDERER_H_
 #define TWOD_RENDERER_H_
 
-#include "Core/pledGL.h"
+#include "pledGL.h"
 
 class Renderer {
 private:
