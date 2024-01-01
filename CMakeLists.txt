@@ -12,7 +12,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 
 # Set output directory of EXE file.
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
-file(GLOB_RECURSE LIBSRC "Core/src/*.cpp" "Core/src/*.h" "external/glad/*.c" "external/glad/*.h")
+file(GLOB_RECURSE LIBSRC "Core/src/*.cpp" "Core/src/*.h" "external/glad/*.c" "external/glad/*.h" "external/stb/*.h" "external/stb/*.cpp")
 add_library(pledGL SHARED ${LIBSRC})
 target_include_directories(
     pledGL
