@@ -5,7 +5,7 @@
 
 class UniformBuffer {
 public:
-    void CreateBuffer(uint32_t size, uint32_t binding);
+    void CreateBuffer(const uint32_t size, const uint32_t binding);
     ~UniformBuffer();
 
     void SetData(const void* data, uint32_t size, uint32_t offset);

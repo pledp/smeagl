@@ -54,11 +54,11 @@ void Game::End() {
     Renderer::Exit();
 }
 
-void Game::SetGraphics(GraphicsAPI::API api) {
+void Game::SetGraphics(const GraphicsAPI::API api) {
     graphics = GraphicsAPI::SetRenderer(api);
 }
 
-void Game::SetFps(int newFps) {
+void Game::SetFps(const int newFps) {
     fps = newFps;
 }
 

@@ -12,7 +12,7 @@ class ShaderProgram {
 public: 
     void BindProgram();
     void CreateProgram(const std::string& vertShader, const std::string& fragShader);
-    void UploadUniformMat4(const std::string& name, const glm::mat4 matrix);
+    void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
     void UploadUniform1i(const std::string& name, const int value);
 
     uint32_t GetID() { return m_ProgramID; };

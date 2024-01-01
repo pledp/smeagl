@@ -46,7 +46,7 @@ public:
     static void DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size);
 
 
-    static void ClearScreen(pledGL::Vector3 col);
+    static void ClearScreen(const pledGL::Vector3& col);
 };
 
 #endif

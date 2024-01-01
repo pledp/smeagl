@@ -248,7 +248,7 @@ void Renderer::DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size,
     s_Data.QuadIndexCount += 6;
 }
 
-void Renderer::ClearScreen(pledGL::Vector3 color) {
+void Renderer::ClearScreen(const pledGL::Vector3& color) {
     glClearColor(color.x, color.y, color.z, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 }

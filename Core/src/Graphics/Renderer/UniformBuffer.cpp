@@ -6,7 +6,7 @@ UniformBuffer::~UniformBuffer() {
     glDeleteBuffers(1, &m_BufferID);
 }
 
-void UniformBuffer::CreateBuffer(uint32_t size, uint32_t binding) {
+void UniformBuffer::CreateBuffer(const uint32_t size, const uint32_t binding) {
     glCreateBuffers(1, &m_BufferID);
     glBindBuffer(GL_UNIFORM_BUFFER, m_BufferID);
     glBufferData(GL_UNIFORM_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);

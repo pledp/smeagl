@@ -12,7 +12,7 @@ public:
     virtual void Run() = 0;
     virtual void End() = 0;
 
-    virtual void SetFps(int newFps) = 0;
+    virtual void SetFps(const int newFps) = 0;
 
     pledGL::GameTime GameTime;
 };

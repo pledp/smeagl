@@ -20,11 +20,11 @@ public:
     void Run() override;
     void End() override;
 
-    void SetFps(int NewFps) override;
+    void SetFps(const int NewFps) override;
 
     void Loop();
 
-    void SetGraphics(GraphicsAPI::API api);
+    void SetGraphics(const GraphicsAPI::API api);
 
     // Get singelton object
     static Game& GetGame() { return *s_Instance; }
