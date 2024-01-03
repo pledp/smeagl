@@ -30,7 +30,7 @@ pledGL::Texture2D::Texture2D(const char *path) {
 } 
 
 pledGL::Texture2D::~Texture2D() {
-    glDeleteTextures(1, &mTextureID);
+    //glDeleteTextures(1, &mTextureID);
 }
 
 void pledGL::Texture2D::Bind(const uint32_t slot) {

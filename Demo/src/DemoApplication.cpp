@@ -72,11 +72,13 @@ void DemoApplication::Render() {
     pledGL::Renderer::DrawQuad({xPos, 0.0f, 0.0f}, {size, size, 0.0f}, {1.0f, 0.0f, 0.0f});
     pledGL::Renderer::DrawQuad({0.5f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.0f, 0.0f});
     pledGL::Renderer::DrawTri({0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
+    pledGL::Renderer::EndDraw();
 
     pledGL::Renderer::StartDraw(vp);
     pledGL::Renderer::DrawTri({0.2f, 0.2f, 0.0f}, {size * 0.5f, size * 0.5f, 0.0f}, {0.0f, 1.0f, 1.0f});
     pledGL::Renderer::DrawQuad({0.5f, 1.0f, 0.0f}, {size * 0.3f, size * 0.8f, 0.0f}, {0.0f, 0.0f, 1.0f});
     pledGL::Renderer::DrawTri({0.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
+    pledGL::Renderer::DrawTri({1.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
 
 
     pledGL::Renderer::EndDraw();

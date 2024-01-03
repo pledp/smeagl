@@ -3,7 +3,7 @@
 
 #include "Application\Game.h"
 
-class DemoApplication : public Game {
+class DemoApplication : public pledGL::Game {
     public:
         DemoApplication(); 
         ~DemoApplication();
@@ -13,7 +13,7 @@ class DemoApplication : public Game {
         void Render() override;
 
     private: 
-        GraphicsBase* graphics = nullptr;
+        pledGL::GraphicsBase* graphics = nullptr;
 };
 
 #endif

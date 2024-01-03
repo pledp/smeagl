@@ -6,7 +6,7 @@
 #include <iostream>
 
 pledGL::ShaderProgram::~ShaderProgram() {
-    glDeleteProgram(mProgramID);
+    //glDeleteProgram(mProgramID);
 }
 
 // Creates a program (Application that runs on the GPU, in this case with our shaders)
