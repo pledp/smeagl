@@ -5,15 +5,15 @@
 #include "Graphics/Window/GraphicsAPI.h"
 #include "Input/Keyboard.h"
 
-Game* Game::s_Instance = nullptr;
-Game::Game() {
+pledGL::Game* pledGL::Game::s_Instance = nullptr;
+pledGL::Game::Game() {
     s_Instance = this;
 }
-Game::~Game() {
+pledGL::Game::~Game() {
     delete graphics;
 }
 
-void Game::Run() {
+void pledGL::Game::Run() {
     initRun();
 
     Init();
@@ -31,12 +31,12 @@ void Game::Run() {
     }
 }
 
-void Game::StartLoop() {
+void pledGL::Game::StartLoop() {
     frameTimer.StartTimer();
     frameDelay = 1000.0f / fps;
     frameStart = frameTimer.CurrentTimeInMilliseconds<uint64_t>();
 }
-void Game::EndLoop() {
+void pledGL::Game::EndLoop() {
     frameTime = frameTimer.CurrentTimeInMilliseconds<uint64_t>() - frameStart;
 
     if(frameDelay > frameTime) {
@@ -48,21 +48,21 @@ void Game::EndLoop() {
     GameTime.TotalTimeElapsedSeconds += time;
 }
 
-void Game::End() {
+void pledGL::Game::End() {
     isPlaying = false;
     graphics->Exit();
     Renderer::Exit();
 }
 
-void Game::SetGraphics(const GraphicsAPI::API api) {
+void pledGL::Game::SetGraphics(const GraphicsAPI::API api) {
     graphics = GraphicsAPI::SetRenderer(api);
 }
 
-void Game::SetFps(const int newFps) {
+void pledGL::Game::SetFps(const int newFps) {
     fps = newFps;
 }
 
-void Game::initRun() {
+void pledGL::Game::initRun() {
     createWindow = true;
     fps = 60;
 
@@ -76,7 +76,7 @@ void Game::initRun() {
     Renderer::Init();
 }
 
-void Game::Loop() {
+void pledGL::Game::Loop() {
     ProcessInput();
     Keyboard::Update();
     Update();
@@ -84,7 +84,7 @@ void Game::Loop() {
     graphics->Flush();
 }
 
-void Game::ProcessInput() {
+void pledGL::Game::ProcessInput() {
     graphics->ProcessInput(this);
 }
 

@@ -24,7 +24,7 @@ DemoApplication::DemoApplication() {
 }
 
 void DemoApplication::Init() {
-    Timer timer;
+    pledGL::Timer timer;
     timer.StartTimer();
     std::cout << timer.CurrentTimeInSeconds<float>();
 }
@@ -33,23 +33,23 @@ void DemoApplication::Update() {
     size = sin(GameTime.TotalTimeElapsedSeconds);
 
 
-    if(Keyboard::GetKeyState(pledGL_key_Q)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_Q)) {
         zoom = std::max(0.0f, zoom - 0.5f * GameTime.DeltaTime);
     }
-    if(Keyboard::GetKeyState(pledGL_key_E)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_E)) {
         zoom = std::max(0.0f, zoom + 0.5f * GameTime.DeltaTime);
     }
 
-    if(Keyboard::GetKeyState(pledGL_key_W)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_W)) {
         yPos -= 1.0f * GameTime.DeltaTime;
     }
-    if(Keyboard::GetKeyState(pledGL_key_S)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_S)) {
         yPos += 1.0f * GameTime.DeltaTime;
     }
-    if(Keyboard::GetKeyState(pledGL_key_A)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_A)) {
         xPos += 1.0f * GameTime.DeltaTime;
     }
-    if(Keyboard::GetKeyState(pledGL_key_D)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_D)) {
         xPos -= 1.0f * GameTime.DeltaTime;
     }
 
@@ -61,26 +61,25 @@ void DemoApplication::Update() {
 }
 
 void DemoApplication::Render() {
-    Renderer::ClearScreen({1.0f, 1.0f, 1.0f});
+    pledGL::Renderer::ClearScreen({1.0f, 1.0f, 1.0f});
 
-    Renderer::StartDraw(vp);
+    pledGL::Renderer::StartDraw(vp);
 
-    Renderer::DrawQuad({0.0f + (std::abs(size) / 2), 0.2f + (1.0f / 2), 0.0f}, {std::abs(size), 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
-    Renderer::EndDraw();
+    pledGL::Renderer::DrawQuad({0.0f + (std::abs(size) / 2), 0.2f + (1.0f / 2), 0.0f}, {std::abs(size), 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
+    pledGL::Renderer::EndDraw();
 
-    Renderer::StartDraw(vp);
-    Renderer::DrawQuad({xPos, 0.0f, 0.0f}, {size, size, 0.0f}, {1.0f, 0.0f, 0.0f});
-    Renderer::DrawQuad({0.5f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.0f, 0.0f});
-    Renderer::DrawTri({0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
-    Renderer::EndDraw();
+    pledGL::Renderer::StartDraw(vp);
+    pledGL::Renderer::DrawQuad({xPos, 0.0f, 0.0f}, {size, size, 0.0f}, {1.0f, 0.0f, 0.0f});
+    pledGL::Renderer::DrawQuad({0.5f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.0f, 0.0f});
+    pledGL::Renderer::DrawTri({0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
 
-    Renderer::StartDraw(vp);
-    Renderer::DrawTri({0.2f, 0.2f, 0.0f}, {size * 0.5f, size * 0.5f, 0.0f}, {0.0f, 1.0f, 1.0f});
-    Renderer::DrawQuad({0.5f, 1.0f, 0.0f}, {size * 0.3f, size * 0.8f, 0.0f}, {0.0f, 0.0f, 1.0f});
-    Renderer::DrawTri({0.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
+    pledGL::Renderer::StartDraw(vp);
+    pledGL::Renderer::DrawTri({0.2f, 0.2f, 0.0f}, {size * 0.5f, size * 0.5f, 0.0f}, {0.0f, 1.0f, 1.0f});
+    pledGL::Renderer::DrawQuad({0.5f, 1.0f, 0.0f}, {size * 0.3f, size * 0.8f, 0.0f}, {0.0f, 0.0f, 1.0f});
+    pledGL::Renderer::DrawTri({0.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
 
 
-    Renderer::EndDraw();
+    pledGL::Renderer::EndDraw();
 }
 
 DemoApplication::~DemoApplication() {

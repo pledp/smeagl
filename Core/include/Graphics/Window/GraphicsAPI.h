@@ -3,15 +3,17 @@
 
 #include "Graphics/Window/GraphicsBase.h"
 
-class GraphicsAPI  {
-public:
-    enum class API
-    {
-        None = 0, SDL = 1, OpenGL = 2
+namespace pledGL {
+    class GraphicsAPI  {
+    public:
+        enum class API
+        {
+            None = 0, SDL = 1, OpenGL = 2
+        };
+
+        static GraphicsBase* SetRenderer(API api);
+
     };
-
-    static GraphicsBase* SetRenderer(API api);
-
 };
 
 #endif

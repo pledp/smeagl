@@ -4,17 +4,19 @@
 #include <cstdint>
 #include "pledGL.h"
 
-class GameBase {
-public:
-    /**
-     * The game context.
-    */    
-    virtual void Run() = 0;
-    virtual void End() = 0;
+namespace pledGL {
+    class GameBase {
+    public:
+        /**
+         * The game context.
+        */    
+        virtual void Run() = 0;
+        virtual void End() = 0;
 
-    virtual void SetFps(const int newFps) = 0;
+        virtual void SetFps(const int newFps) = 0;
 
-    pledGL::GameTime GameTime;
+        pledGL::GameTime GameTime;
+    };
 };
 
 #endif

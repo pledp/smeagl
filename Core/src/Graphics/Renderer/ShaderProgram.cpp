@@ -5,8 +5,12 @@
 #include <memory>
 #include <iostream>
 
+pledGL::ShaderProgram::~ShaderProgram() {
+    glDeleteProgram(mProgramID);
+}
+
 // Creates a program (Application that runs on the GPU, in this case with our shaders)
-void ShaderProgram::CreateProgram(const std::string& vertPath, const std::string& fragPath) {
+void pledGL::ShaderProgram::CreateProgram(const std::string& vertPath, const std::string& fragPath) {
     uint32_t program = glCreateProgram();
     std::string vertSource = getShaderFromPath(vertPath);
     std::string fragSource = getShaderFromPath(fragPath);
@@ -23,14 +27,14 @@ void ShaderProgram::CreateProgram(const std::string& vertPath, const std::string
     glDeleteShader(vertShader);
     glDeleteShader(fragShader);
 
-    m_ProgramID = program;
+    mProgramID = program;
 
 
     std::cout << getShaderFromPath(std::string("assets/shaders/frag.shader"));
 }
 
 // Creates a shader
-uint32_t ShaderProgram::createShader(const std::string& source, GLenum shaderType) {
+uint32_t pledGL::ShaderProgram::createShader(const std::string& source, GLenum shaderType) {
     uint32_t id = glCreateShader(shaderType);
     const char* src = source.c_str();
 
@@ -40,7 +44,7 @@ uint32_t ShaderProgram::createShader(const std::string& source, GLenum shaderTyp
     return id;
 }
 
-std::string ShaderProgram::getShaderFromPath(const std::string& path) {
+std::string pledGL::ShaderProgram::getShaderFromPath(const std::string& path) {
     std::ifstream stream(path);
     std::string line;
     std::stringstream ss;
@@ -52,17 +56,17 @@ std::string ShaderProgram::getShaderFromPath(const std::string& path) {
     return ss.str();
 }
 
-void ShaderProgram::BindProgram() {
-    glUseProgram(m_ProgramID);
+void pledGL::ShaderProgram::BindProgram() {
+    glUseProgram(mProgramID);
 }
 
 // Upload a uniform to the shader
-void ShaderProgram::UploadUniformMat4(const std::string& name, const glm::mat4& matrix) {
-    GLint location = glGetUniformLocation(m_ProgramID, name.c_str());
+void pledGL::ShaderProgram::UploadUniformMat4(const std::string& name, const glm::mat4& matrix) {
+    GLint location = glGetUniformLocation(mProgramID, name.c_str());
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
-void ShaderProgram::UploadUniform1i(const std::string& name, const int value) {
-    GLint location = glGetUniformLocation(m_ProgramID, name.c_str());
+void pledGL::ShaderProgram::UploadUniform1i(const std::string& name, const int value) {
+    GLint location = glGetUniformLocation(mProgramID, name.c_str());
     glUniform1i(location, value);
 }

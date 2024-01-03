@@ -9,51 +9,53 @@
 
 #include <cstdint>
 
-class Game : public GameBase {
-public:
-    /**
-     * The game context.
-    */
-    Game();
-    ~Game();
-    
-    void Run() override;
-    void End() override;
+namespace pledGL {
+    class Game : public GameBase {
+    public:
+        /**
+         * The game context.
+        */
+        Game();
+        ~Game();
+        
+        void Run() override;
+        void End() override;
 
-    void SetFps(const int NewFps) override;
+        void SetFps(const int NewFps) override;
 
-    void Loop();
+        void Loop();
 
-    void SetGraphics(const GraphicsAPI::API api);
+        void SetGraphics(const GraphicsAPI::API api);
 
-    // Get singelton object
-    static Game& GetGame() { return *s_Instance; }
+        // Get singelton object
+        static Game& GetGame() { return *s_Instance; }
 
-private:
-    // Singleton object
-    static Game* s_Instance;
+    private:
+        // Singleton object
+        static Game* s_Instance;
 
 
-    uint64_t frameStart, frameTime;
-    uint64_t frameDelay;
-    Timer frameTimer;
+        uint64_t frameStart, frameTime;
+        uint64_t frameDelay;
+        Timer frameTimer;
 
-    Renderer* renderer = nullptr;
-    GraphicsBase* graphics = nullptr;
+        Renderer* renderer = nullptr;
+        GraphicsBase* graphics = nullptr;
 
-    bool isPlaying = false;
-    bool createWindow = false;
+        bool isPlaying = false;
+        bool createWindow = false;
 
-    int fps;
+        int fps;
 
-    void ProcessInput();
-    void initRun();
-    void StartLoop();
-    void EndLoop();
+        void ProcessInput();
+        void initRun();
+        void StartLoop();
+        void EndLoop();
 
-    virtual void Init() = 0;
-    virtual void Update() = 0;
-    virtual void Render() = 0;
+        virtual void Init() = 0;
+        virtual void Update() = 0;
+        virtual void Render() = 0;
+    };
 };
 
 #endif

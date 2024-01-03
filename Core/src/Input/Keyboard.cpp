@@ -1,12 +1,12 @@
 #include "Input/Keyboard.h"
 #include <SDL2/SDL_keyboard.h>
 
-std::array<bool, Keyboard::s_KeyCount> Keyboard::s_KeysDown;
-std::array<bool, Keyboard::s_KeyCount> Keyboard::s_KeysUp;
-std::array<bool, Keyboard::s_KeyCount> Keyboard::s_Keys;
-std::array<bool, Keyboard::s_KeyCount> Keyboard::s_LastKeysState;
+std::array<bool, pledGL::Keyboard::s_KeyCount> pledGL::Keyboard::s_KeysDown;
+std::array<bool, pledGL::Keyboard::s_KeyCount> pledGL::Keyboard::s_KeysUp;
+std::array<bool, pledGL::Keyboard::s_KeyCount> pledGL::Keyboard::s_Keys;
+std::array<bool, pledGL::Keyboard::s_KeyCount> pledGL::Keyboard::s_LastKeysState;
 
-void Keyboard::Init() {
+void pledGL::Keyboard::Init() {
     std::fill(s_KeysDown.begin(), s_KeysDown.end(), false);
     std::fill(s_KeysUp.begin(), s_KeysUp.end(), false);
     std::fill(s_Keys.begin(), s_Keys.end(), false);
@@ -14,7 +14,7 @@ void Keyboard::Init() {
 
 }
 
-void Keyboard::Update() {
+void pledGL::Keyboard::Update() {
     std::fill(s_KeysDown.begin(), s_KeysDown.end(), false);
     std::fill(s_KeysUp.begin(), s_KeysUp.end(), false);
 
@@ -34,10 +34,10 @@ void Keyboard::Update() {
     }
 }
 
-bool Keyboard::GetKeyState(int key) {
+bool pledGL::Keyboard::GetKeyState(int key) {
     return s_Keys[key];
 }
 
-bool Keyboard::GetKeyPressed(int key) {
+bool pledGL::Keyboard::GetKeyPressed(int key) {
     return !s_LastKeysState[key] && s_Keys[key];
 }

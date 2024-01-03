@@ -9,11 +9,11 @@
 
 SDL_GLContext context;
 
-SDLGraphics::SDLGraphics() {
+pledGL::SDLGraphics::SDLGraphics() {
 
 }
 
-void SDLGraphics::Init(bool createWindow) {
+void pledGL::SDLGraphics::Init(bool createWindow) {
     this->width = 1024;
     this->height = 768;
 
@@ -32,7 +32,7 @@ void SDLGraphics::Init(bool createWindow) {
     std::cout << "Window created!";
 }
 
-void SDLGraphics::Exit() {
+void pledGL::SDLGraphics::Exit() {
     SDL_DestroyWindow(window);
     SDL_GL_DeleteContext(context);
     SDL_Quit();
@@ -41,11 +41,11 @@ void SDLGraphics::Exit() {
     renderer = NULL;
 }
 
-void SDLGraphics::Flush() {
+void pledGL::SDLGraphics::Flush() {
     SDL_GL_SwapWindow(window);
 }
 
-void SDLGraphics::ProcessInput(GameBase* context) {
+void pledGL::SDLGraphics::ProcessInput(pledGL::GameBase* context) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         switch(e.type) {
@@ -59,6 +59,6 @@ void SDLGraphics::ProcessInput(GameBase* context) {
     } 
 }
 
-void SDLGraphics::AddDelay(uint64_t delay) {
+void pledGL::SDLGraphics::AddDelay(uint64_t delay) {
     SDL_Delay(delay);
 }

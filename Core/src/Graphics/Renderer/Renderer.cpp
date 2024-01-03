@@ -24,7 +24,7 @@ struct Vertex {
 
 struct RendererData {
     unsigned int TriVertexArray; 
-    std::shared_ptr<VertexBuffer> TriVertexBuffer; 
+    std::shared_ptr<pledGL::VertexBuffer> TriVertexBuffer; 
     unsigned int TriIndicesBuffer;
     uint32_t TriIndexCount = 0; 
     Vertex* TriVertexBufferBase = nullptr;
@@ -32,10 +32,10 @@ struct RendererData {
 
     glm::vec4 TriVertPositions[3];
 
-    ShaderProgram Program;
+    pledGL::ShaderProgram Program;
     
     unsigned int QuadVertexArray; 
-    std::shared_ptr<VertexBuffer> QuadVertexBuffer; 
+    std::shared_ptr<pledGL::VertexBuffer> QuadVertexBuffer; 
     unsigned int QuadIndicesBuffer;
     Vertex* QuadVertexBufferBase = nullptr;
     Vertex* QuadVertexBufferPtr = nullptr;
@@ -49,12 +49,12 @@ struct RendererData {
         glm::mat4 ViewProjection;
     };
     CameraData CameraBuffer;
-    UniformBuffer CameraUniformBuffer;
+    pledGL::UniformBuffer CameraUniformBuffer;
 };
 
 static RendererData s_Data;
 
-void Renderer::Init() {
+void pledGL::Renderer::Init() {
     uint32_t maxIndices = 1024;
 
     s_Data.Program.CreateProgram(std::string("assets/shaders/vert.shader"), std::string("assets/shaders/frag.shader"));
@@ -159,7 +159,7 @@ void Renderer::Init() {
     texture2.Bind(1);
 }
 
-void Renderer::Exit() {
+void pledGL::Renderer::Exit() {
     delete[] s_Data.TriVertexBufferBase;
     s_Data.TriVertexBufferPtr = nullptr;
 
@@ -167,7 +167,7 @@ void Renderer::Exit() {
     s_Data.QuadVertexBufferPtr = nullptr;
 }
 
-void Renderer::StartDraw(const glm::mat4 vp) {
+void pledGL::Renderer::StartDraw(const glm::mat4 vp) {
     s_Data.TriVertexBufferPtr = s_Data.TriVertexBufferBase;
     s_Data.TriIndexCount = 0;
 
@@ -178,11 +178,11 @@ void Renderer::StartDraw(const glm::mat4 vp) {
     s_Data.CameraUniformBuffer.SetData(&s_Data.CameraBuffer, sizeof(s_Data.CameraBuffer), 0);
 }
 
-void Renderer::EndDraw() {
+void pledGL::Renderer::EndDraw() {
     flush();
 }
 
-void Renderer::flush() {
+void pledGL::Renderer::flush() {
     if(s_Data.QuadIndexCount) {
         uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.QuadVertexBufferPtr -(uint8_t*)s_Data.QuadVertexBufferBase);
 
@@ -204,11 +204,11 @@ void Renderer::flush() {
     }
 }
 
-void Renderer::DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size) {
+void pledGL::Renderer::DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size) {
     DrawTri(pos, size, {1.0f, 1.0f, 1.0f});
 }
 
-void Renderer::DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color) {
+void pledGL::Renderer::DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color) {
     constexpr size_t triVertCount = 3;
     constexpr glm::vec2 textureCoords[] = { {0.0f, 0.0f}, {1.0f, 0.0f}, {0.5f, 1.0f} };
 
@@ -227,11 +227,11 @@ void Renderer::DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size, 
 }
 
 
-void Renderer::DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size) {
+void pledGL::Renderer::DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size) {
     DrawQuad(pos, size, {1.0f, 1.0f, 1.0f});
 }
 
-void Renderer::DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color) {
+void pledGL::Renderer::DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color) {
     constexpr size_t quadVertCount = 4;
     constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
@@ -248,7 +248,7 @@ void Renderer::DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size,
     s_Data.QuadIndexCount += 6;
 }
 
-void Renderer::ClearScreen(const pledGL::Vector3& color) {
+void pledGL::Renderer::ClearScreen(const pledGL::Vector3& color) {
     glClearColor(color.x, color.y, color.z, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 }

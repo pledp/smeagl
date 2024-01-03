@@ -2,7 +2,7 @@
 #include <stb/stb_image.h>
 #include "Graphics/Renderer/Texture2D.h"
 
-Texture2D::Texture2D(const char *path) {
+pledGL::Texture2D::Texture2D(const char *path) {
     // Load image
     int width, height, nrChannels;
     unsigned char *data = stbi_load(path, &width, &height, &nrChannels, 0);
@@ -29,7 +29,11 @@ Texture2D::Texture2D(const char *path) {
 
 } 
 
-void Texture2D::Bind(const uint32_t slot) {
+pledGL::Texture2D::~Texture2D() {
+    glDeleteTextures(1, &mTextureID);
+}
+
+void pledGL::Texture2D::Bind(const uint32_t slot) {
     // Bind texture to texture unit
     glBindTextureUnit(slot, mTextureID);
 }
