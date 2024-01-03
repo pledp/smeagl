@@ -33,23 +33,23 @@ void DemoApplication::Update() {
     size = sin(GameTime.TotalTimeElapsedSeconds);
 
 
-    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_Q)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::Key::Q)) {
         zoom = std::max(0.0f, zoom - 0.5f * GameTime.DeltaTime);
     }
-    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_E)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::Key::E)) {
         zoom = std::max(0.0f, zoom + 0.5f * GameTime.DeltaTime);
     }
 
-    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_W)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::Key::W)) {
         yPos -= 1.0f * GameTime.DeltaTime;
     }
-    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_S)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::Key::S)) {
         yPos += 1.0f * GameTime.DeltaTime;
     }
-    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_A)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::Key::A)) {
         xPos += 1.0f * GameTime.DeltaTime;
     }
-    if(pledGL::Keyboard::GetKeyState(pledGL::pledGL_key_D)) {
+    if(pledGL::Keyboard::GetKeyState(pledGL::Key::D)) {
         xPos -= 1.0f * GameTime.DeltaTime;
     }
 
