@@ -1,6 +1,8 @@
 #ifndef TEXTURE_TWOD_
 #define TEXTURE_TWOD_
 
+#include <cstdint>
+
 namespace pledGL {
     class Texture2D {
     public:
