@@ -1,2 +1,19 @@
 # pledGL
-OpenGL game framework/engine experiments & learning experiences. 
+
+Very basic OpenGL & SDL game framework.
+
+## Things:
+
+- Window
+- Basic 2D Rendering
+- Keyboard input
+- Timer
+
+## Building
+
+Building with Cmake:
+
+```shell
+cmake .
+cmake --build .
+```
