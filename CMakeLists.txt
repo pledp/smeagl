@@ -25,7 +25,6 @@ target_include_directories(
 )
 target_link_libraries(
     pledGL
-        mingw32
         SDL2main
         SDL2
 )
