@@ -2,6 +2,7 @@
 #define GAME_H_
 
 #include <cstdint>
+#include <memory>
 
 #include "Graphics/Window/GraphicsAPI.h"
 #include "Graphics/Window/GraphicsBase.h"
@@ -20,14 +21,15 @@ namespace pledGL {
 
         void Run() override;
         void End() override;
-
+        
         void SetGraphics(const GraphicsAPI::API api);
 
         // Get singelton object
         static Game& GetGame() { return *s_instance; }
 
     protected:
-        void SetTargetFps(const int NewFps) override;
+        void SetTargetFps(const int new_fps) override;
+        int target_fps;
 
 
     private:
@@ -39,13 +41,13 @@ namespace pledGL {
         uint64_t frameDelay;
         Timer frameTimer;
 
-        Renderer* m_renderer = nullptr;
-        GraphicsBase* m_graphics = nullptr;
+        std::unique_ptr<Renderer> m_renderer;
+        std::unique_ptr<GraphicsBase> m_graphics;
 
         bool isPlaying = false;
         bool createWindow = false;
 
-        int target_fps;
+        pledGL::GameTime game_time;
 
         void ProcessInput();
         void initRun();
@@ -55,8 +57,8 @@ namespace pledGL {
         void EndLoop();
 
         virtual void Init() = 0;
-        virtual void Update() = 0;
-        virtual void Render(Renderer m_renderer) = 0;
+        virtual void Update(const GameTime& game_time) = 0;
+        virtual void Render(const GameTime& game_time, Renderer& m_renderer) = 0;
     };
 };
 

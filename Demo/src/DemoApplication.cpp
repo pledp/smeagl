@@ -29,28 +29,28 @@ void DemoApplication::Init() {
     std::cout << timer.CurrentTimeInSeconds<float>();
 }
 
-void DemoApplication::Update() {
-    size = sin(GameTime.TotalTimeElapsedSeconds);
+void DemoApplication::Update(const pledGL::GameTime& game_time) {
+    size = sin(game_time.TotalTimeElapsedSeconds);
 
 
     if(pledGL::Keyboard::GetKeyState(pledGL::Key::Q)) {
-        zoom = std::max(0.0f, zoom - 0.5f * GameTime.DeltaTime);
+        zoom = std::max(0.0f, zoom - 0.5f * game_time.DeltaTime);
     }
     if(pledGL::Keyboard::GetKeyState(pledGL::Key::E)) {
-        zoom = std::max(0.0f, zoom + 0.5f * GameTime.DeltaTime);
+        zoom = std::max(0.0f, zoom + 0.5f * game_time.DeltaTime);
     }
 
     if(pledGL::Keyboard::GetKeyState(pledGL::Key::W)) {
-        yPos -= 1.0f * GameTime.DeltaTime;
+        yPos -= 1.0f * game_time.DeltaTime;
     }
     if(pledGL::Keyboard::GetKeyState(pledGL::Key::S)) {
-        yPos += 1.0f * GameTime.DeltaTime;
+        yPos += 1.0f * game_time.DeltaTime;
     }
     if(pledGL::Keyboard::GetKeyState(pledGL::Key::A)) {
-        xPos += 1.0f * GameTime.DeltaTime;
+        xPos += 1.0f * game_time.DeltaTime;
     }
     if(pledGL::Keyboard::GetKeyState(pledGL::Key::D)) {
-        xPos -= 1.0f * GameTime.DeltaTime;
+        xPos -= 1.0f * game_time.DeltaTime;
     }
 
     viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(xPos, yPos, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(zoom, zoom, 1.0f));
@@ -60,7 +60,7 @@ void DemoApplication::Update() {
 
 }
 
-void DemoApplication::Render(pledGL::Renderer renderer) {
+void DemoApplication::Render(const pledGL::GameTime& game_time, pledGL::Renderer& renderer) {
     renderer.ClearScreen({1.0f, 1.0f, 1.0f});
     renderer.StartDraw(vp);
 

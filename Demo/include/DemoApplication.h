@@ -9,8 +9,8 @@ class DemoApplication : public pledGL::Game {
         ~DemoApplication();
 
         void Init() override;
-        void Update() override;
-        void Render(pledGL::Renderer renderer) override;
+        void Update(const pledGL::GameTime& game_time) override;
+        void Render(const pledGL::GameTime& game_time, pledGL::Renderer& renderer) override;
 
     private: 
         pledGL::GraphicsBase* graphics = nullptr;

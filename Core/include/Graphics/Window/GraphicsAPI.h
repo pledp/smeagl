@@ -1,6 +1,8 @@
 #ifndef GRAPHICS_API_H_
 #define GRAPHICS_API_H_
 
+#include <memory>
+
 #include "Graphics/Window/GraphicsBase.h"
 
 namespace pledGL {
@@ -11,7 +13,7 @@ namespace pledGL {
             None = 0, SDL = 1, OpenGL = 2
         };
 
-        static GraphicsBase* SetRenderer(API api);
+        static std::unique_ptr<GraphicsBase> SetRenderer(API api);
 
     };
 };

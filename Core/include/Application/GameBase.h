@@ -12,8 +12,7 @@ namespace pledGL {
         virtual void End() = 0;
 
     protected: 
-        pledGL::GameTime GameTime;
-        virtual void SetTargetFps(const int newFps) = 0;
+        virtual void SetTargetFps(const int new_fps) = 0;
     };
 };
 

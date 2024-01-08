@@ -10,8 +10,7 @@ pledGL::Game::Game() {
     s_instance = this;
 }
 pledGL::Game::~Game() {
-    delete m_graphics;
-    delete m_renderer;
+    
 }
 
 void pledGL::Game::Run() {
@@ -45,8 +44,8 @@ void pledGL::Game::EndLoop() {
     }
     float time = frameTimer.CurrentTimeInSeconds<float>();
 
-    GameTime.DeltaTime = time;
-    GameTime.TotalTimeElapsedSeconds += time;
+    game_time.DeltaTime = time;
+    game_time.TotalTimeElapsedSeconds += time;
 }
 
 void pledGL::Game::End() {
@@ -68,15 +67,16 @@ void pledGL::Game::initRun() {
     Keyboard::Init();
 
     // Initialize 2D renderer
-    m_renderer = new Renderer();
+    m_renderer = std::make_unique<pledGL::Renderer>();
     m_renderer->Init();
+
 }
 
 void pledGL::Game::Loop() {
     ProcessInput();
     Keyboard::Update();
-    Update();
-    Render(*m_renderer);
+    Update(game_time);
+    Render(game_time, *m_renderer);
 
     // Swap back and front buffer (Display OpenGL image on window)
     m_graphics->Flush();
@@ -90,8 +90,8 @@ void pledGL::Game::SetGraphics(const GraphicsAPI::API api) {
     m_graphics = GraphicsAPI::SetRenderer(api);
 }
 
-void pledGL::Game::SetTargetFps(const int newFps) {
-    target_fps = newFps;
+void pledGL::Game::SetTargetFps(const int new_fps) {
+    target_fps = new_fps;
 }
 
 
