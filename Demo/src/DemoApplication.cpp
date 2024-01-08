@@ -60,28 +60,28 @@ void DemoApplication::Update() {
 
 }
 
-void DemoApplication::Render() {
-    pledGL::Renderer::ClearScreen({1.0f, 1.0f, 1.0f});
+void DemoApplication::Render(pledGL::Renderer renderer) {
+    renderer.ClearScreen({1.0f, 1.0f, 1.0f});
 
-    pledGL::Renderer::StartDraw(vp);
+    renderer.StartDraw(vp);
 
-    pledGL::Renderer::DrawQuad({0.0f + (std::abs(size) / 2), 0.2f + (1.0f / 2), 0.0f}, {std::abs(size), 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
-    pledGL::Renderer::EndDraw();
+    renderer.DrawQuad({0.0f + (std::abs(size) / 2), 0.2f + (1.0f / 2), 0.0f}, {std::abs(size), 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
+    renderer.EndDraw();
 
-    pledGL::Renderer::StartDraw(vp);
-    pledGL::Renderer::DrawQuad({xPos, 0.0f, 0.0f}, {size, size, 0.0f}, {1.0f, 0.0f, 0.0f});
-    pledGL::Renderer::DrawQuad({0.5f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.0f, 0.0f});
-    pledGL::Renderer::DrawTri({0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
-    pledGL::Renderer::EndDraw();
+    renderer.StartDraw(vp);
+    renderer.DrawQuad({xPos, 0.0f, 0.0f}, {size, size, 0.0f}, {1.0f, 0.0f, 0.0f});
+    renderer.DrawQuad({0.5f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.0f, 0.0f});
+    renderer.DrawTri({0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
+    renderer.EndDraw();
 
-    pledGL::Renderer::StartDraw(vp);
-    pledGL::Renderer::DrawTri({0.2f, 0.2f, 0.0f}, {size * 0.5f, size * 0.5f, 0.0f}, {0.0f, 1.0f, 1.0f});
-    pledGL::Renderer::DrawQuad({0.5f, 1.0f, 0.0f}, {size * 0.3f, size * 0.8f, 0.0f}, {0.0f, 0.0f, 1.0f});
-    pledGL::Renderer::DrawTri({0.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
-    pledGL::Renderer::DrawTri({1.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
+    renderer.StartDraw(vp);
+    renderer.DrawTri({0.2f, 0.2f, 0.0f}, {size * 0.5f, size * 0.5f, 0.0f}, {0.0f, 1.0f, 1.0f});
+    renderer.DrawQuad({0.5f, 1.0f, 0.0f}, {size * 0.3f, size * 0.8f, 0.0f}, {0.0f, 0.0f, 1.0f});
+    renderer.DrawTri({0.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
+    renderer.DrawTri({1.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
 
 
-    pledGL::Renderer::EndDraw();
+    renderer.EndDraw();
 }
 
 DemoApplication::~DemoApplication() {

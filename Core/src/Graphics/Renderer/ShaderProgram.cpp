@@ -28,9 +28,6 @@ void pledGL::ShaderProgram::CreateProgram(const std::string& vertPath, const std
     glDeleteShader(fragShader);
 
     mProgramID = program;
-
-
-    std::cout << getShaderFromPath(std::string("assets/shaders/frag.shader"));
 }
 
 // Creates a shader

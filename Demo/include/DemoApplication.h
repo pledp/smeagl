@@ -10,7 +10,7 @@ class DemoApplication : public pledGL::Game {
 
         void Init() override;
         void Update() override;
-        void Render() override;
+        void Render(pledGL::Renderer renderer) override;
 
     private: 
         pledGL::GraphicsBase* graphics = nullptr;

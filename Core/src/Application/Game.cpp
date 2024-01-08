@@ -5,12 +5,13 @@
 #include "Graphics/Window/GraphicsAPI.h"
 #include "Input/Keyboard.h"
 
-pledGL::Game* pledGL::Game::s_Instance = nullptr;
+pledGL::Game* pledGL::Game::s_instance = nullptr;
 pledGL::Game::Game() {
-    s_Instance = this;
+    s_instance = this;
 }
 pledGL::Game::~Game() {
-    delete graphics;
+    delete m_graphics;
+    delete m_renderer;
 }
 
 void pledGL::Game::Run() {
@@ -40,7 +41,7 @@ void pledGL::Game::EndLoop() {
     frameTime = frameTimer.CurrentTimeInMilliseconds<uint64_t>() - frameStart;
 
     if(frameDelay > frameTime) {
-        graphics->AddDelay(frameDelay-frameTime);
+        m_graphics->AddDelay(frameDelay-frameTime);
     }
     float time = frameTimer.CurrentTimeInSeconds<float>();
 
@@ -50,42 +51,48 @@ void pledGL::Game::EndLoop() {
 
 void pledGL::Game::End() {
     isPlaying = false;
-    graphics->Exit();
-    Renderer::Exit();
-}
-
-void pledGL::Game::SetGraphics(const GraphicsAPI::API api) {
-    graphics = GraphicsAPI::SetRenderer(api);
-}
-
-void pledGL::Game::SetFps(const int newFps) {
-    fps = newFps;
+    m_graphics->Exit();
+    m_renderer->Exit();
 }
 
 void pledGL::Game::initRun() {
     createWindow = true;
     fps = 60;
 
-    // If graphics isn't set, set it to SDL.
-    if(!graphics) {
+    // If graphics isn't set, set it to SDL
+    if(!m_graphics) {
         SetGraphics(GraphicsAPI::API::SDL);
     }
-    graphics->Init(createWindow);
+    m_graphics->Init(createWindow);
 
     Keyboard::Init();
-    Renderer::Init();
+
+    // Initialize 2D renderer
+    m_renderer = new Renderer();
+    m_renderer->Init();
 }
 
 void pledGL::Game::Loop() {
     ProcessInput();
     Keyboard::Update();
     Update();
-    Render();
-    graphics->Flush();
+    Render(*m_renderer);
+
+    // Swap back and front buffer (Display OpenGL image on window)
+    m_graphics->Flush();
 }
 
 void pledGL::Game::ProcessInput() {
-    graphics->ProcessInput(this);
+    m_graphics->ProcessInput(this);
 }
+
+void pledGL::Game::SetGraphics(const GraphicsAPI::API api) {
+    m_graphics = GraphicsAPI::SetRenderer(api);
+}
+
+void pledGL::Game::SetFps(const int newFps) {
+    fps = newFps;
+}
+
 
 

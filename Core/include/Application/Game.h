@@ -1,13 +1,13 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+#include <cstdint>
+
 #include "Graphics/Window/GraphicsAPI.h"
 #include "Graphics/Window/GraphicsBase.h"
 #include "Application/GameBase.h"
 #include "Graphics/Renderer/Renderer.h"
 #include "Timer.h"
-
-#include <cstdint>
 
 namespace pledGL {
     class Game : public GameBase {
@@ -23,24 +23,22 @@ namespace pledGL {
 
         void SetFps(const int NewFps) override;
 
-        void Loop();
-
         void SetGraphics(const GraphicsAPI::API api);
 
         // Get singelton object
-        static Game& GetGame() { return *s_Instance; }
+        static Game& GetGame() { return *s_instance; }
 
     private:
         // Singleton object
-        static Game* s_Instance;
+        static Game* s_instance;
 
 
         uint64_t frameStart, frameTime;
         uint64_t frameDelay;
         Timer frameTimer;
 
-        Renderer* renderer = nullptr;
-        GraphicsBase* graphics = nullptr;
+        Renderer* m_renderer = nullptr;
+        GraphicsBase* m_graphics = nullptr;
 
         bool isPlaying = false;
         bool createWindow = false;
@@ -49,12 +47,14 @@ namespace pledGL {
 
         void ProcessInput();
         void initRun();
+
         void StartLoop();
+        void Loop();
         void EndLoop();
 
         virtual void Init() = 0;
         virtual void Update() = 0;
-        virtual void Render() = 0;
+        virtual void Render(Renderer m_renderer) = 0;
     };
 };
 

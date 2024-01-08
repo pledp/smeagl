@@ -52,7 +52,7 @@ struct RendererData {
     pledGL::UniformBuffer CameraUniformBuffer;
 };
 
-static RendererData s_Data;
+RendererData s_Data;
 
 void pledGL::Renderer::Init() {
     uint32_t maxIndices = 1024;
@@ -161,10 +161,10 @@ void pledGL::Renderer::Init() {
 
 void pledGL::Renderer::Exit() {
     delete[] s_Data.TriVertexBufferBase;
-    s_Data.TriVertexBufferPtr = nullptr;
+    delete s_Data.TriVertexBufferPtr;
 
     delete[] s_Data.QuadVertexBufferBase;
-    s_Data.QuadVertexBufferPtr = nullptr;
+    delete s_Data.QuadVertexBufferPtr;
 }
 
 void pledGL::Renderer::StartDraw(const glm::mat4 vp) {
