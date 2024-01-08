@@ -62,7 +62,6 @@ void DemoApplication::Update() {
 
 void DemoApplication::Render(pledGL::Renderer renderer) {
     renderer.ClearScreen({1.0f, 1.0f, 1.0f});
-
     renderer.StartDraw(vp);
 
     renderer.DrawQuad({0.0f + (std::abs(size) / 2), 0.2f + (1.0f / 2), 0.0f}, {std::abs(size), 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f});

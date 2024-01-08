@@ -45,12 +45,12 @@ void pledGL::SDLGraphics::Flush() {
     SDL_GL_SwapWindow(window);
 }
 
-void pledGL::SDLGraphics::ProcessInput(pledGL::GameBase* context) {
+void pledGL::SDLGraphics::ProcessInput(pledGL::GameBase& context) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         switch(e.type) {
             case SDL_QUIT:
-                context->End();
+                context.End();
                 break;
             case SDL_WINDOWEVENT:
                 std::cout << "Moved window";

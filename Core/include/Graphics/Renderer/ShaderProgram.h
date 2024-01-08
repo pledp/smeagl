@@ -2,8 +2,9 @@
 #define SHADERPROGRAM_H_
 
 #include <cstdint>
-#include "glad/glad.h"
 #include <string>
+
+#include "glad/glad.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"

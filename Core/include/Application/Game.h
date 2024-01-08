@@ -17,16 +17,18 @@ namespace pledGL {
         */
         Game();
         ~Game();
-        
+
         void Run() override;
         void End() override;
-
-        void SetFps(const int NewFps) override;
 
         void SetGraphics(const GraphicsAPI::API api);
 
         // Get singelton object
         static Game& GetGame() { return *s_instance; }
+
+    protected:
+        void SetTargetFps(const int NewFps) override;
+
 
     private:
         // Singleton object
@@ -43,7 +45,7 @@ namespace pledGL {
         bool isPlaying = false;
         bool createWindow = false;
 
-        int fps;
+        int target_fps;
 
         void ProcessInput();
         void initRun();

@@ -1,12 +1,11 @@
 #ifndef RENDERER_BASE_H_
 #define RENDERER_BASE_H_
 
-
 #include <cstdint>
 
-namespace pledGL {
-    class GameBase;
+#include "Application/GameBase.h"
 
+namespace pledGL {
     class GraphicsBase {
     public:
         virtual ~GraphicsBase() {};
@@ -14,7 +13,7 @@ namespace pledGL {
         virtual void Init(bool createWindow) = 0;
         virtual void Exit() = 0;
         virtual void Flush() = 0;
-        virtual void ProcessInput(pledGL::GameBase* context) = 0;
+        virtual void ProcessInput(pledGL::GameBase& context) = 0;
         virtual void AddDelay(uint64_t delay) = 0;
     };
 };

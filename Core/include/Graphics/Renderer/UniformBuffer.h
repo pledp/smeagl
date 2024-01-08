@@ -9,10 +9,10 @@ namespace pledGL {
         void CreateBuffer(const uint32_t size, const uint32_t binding);
         ~UniformBuffer();
 
-        void SetData(const void* data, uint32_t size, uint32_t offset);
+        void SetData(const void* data, const uint32_t size, const uint32_t offset);
 
     private:
-        uint32_t m_BufferID;
+        uint32_t m_buffer_id;
     };
 };
 

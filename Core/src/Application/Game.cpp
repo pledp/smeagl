@@ -34,7 +34,7 @@ void pledGL::Game::Run() {
 
 void pledGL::Game::StartLoop() {
     frameTimer.StartTimer();
-    frameDelay = 1000.0f / fps;
+    frameDelay = 1000.0f / target_fps;
     frameStart = frameTimer.CurrentTimeInMilliseconds<uint64_t>();
 }
 void pledGL::Game::EndLoop() {
@@ -57,7 +57,7 @@ void pledGL::Game::End() {
 
 void pledGL::Game::initRun() {
     createWindow = true;
-    fps = 60;
+    target_fps = 60;
 
     // If graphics isn't set, set it to SDL
     if(!m_graphics) {
@@ -83,15 +83,15 @@ void pledGL::Game::Loop() {
 }
 
 void pledGL::Game::ProcessInput() {
-    m_graphics->ProcessInput(this);
+    m_graphics->ProcessInput(*this);
 }
 
 void pledGL::Game::SetGraphics(const GraphicsAPI::API api) {
     m_graphics = GraphicsAPI::SetRenderer(api);
 }
 
-void pledGL::Game::SetFps(const int newFps) {
-    fps = newFps;
+void pledGL::Game::SetTargetFps(const int newFps) {
+    target_fps = newFps;
 }
 
 
