@@ -29,6 +29,9 @@ void pledGL::Game::Run() {
         // End the frame and add delay if required
         EndLoop();
     }
+
+    m_graphics->Exit();
+    m_renderer->Exit();
 }
 
 void pledGL::Game::StartLoop() {
@@ -50,8 +53,7 @@ void pledGL::Game::EndLoop() {
 
 void pledGL::Game::End() {
     isPlaying = false;
-    m_graphics->Exit();
-    m_renderer->Exit();
+    std::cout << "YO!";
 }
 
 void pledGL::Game::initRun() {
@@ -76,9 +78,10 @@ void pledGL::Game::Loop() {
     ProcessInput();
     Keyboard::Update();
     Update(game_time);
+    
     Render(game_time, *m_renderer);
 
-    // Swap back and front buffer (Display OpenGL image on window)
+    // Swap back and front buffer. (Display OpenGL image on window)
     m_graphics->Flush();
 }
 

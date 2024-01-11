@@ -62,15 +62,17 @@ void DemoApplication::Update(const pledGL::GameTime& game_time) {
 
 void DemoApplication::Render(const pledGL::GameTime& game_time, pledGL::Renderer& renderer) {
     renderer.ClearScreen({1.0f, 1.0f, 1.0f});
-    renderer.StartDraw(vp);
 
+    renderer.StartDraw(vp);
     renderer.DrawQuad({0.0f + (std::abs(size) / 2), 0.2f + (1.0f / 2), 0.0f}, {std::abs(size), 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
     renderer.EndDraw();
 
     renderer.StartDraw(vp);
+    renderer.DrawTri({3.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
+
     renderer.DrawQuad({xPos, 0.0f, 0.0f}, {size, size, 0.0f}, {1.0f, 0.0f, 0.0f});
     renderer.DrawQuad({0.5f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.0f, 0.0f});
-    renderer.DrawTri({0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f});
+
     renderer.EndDraw();
 
     renderer.StartDraw(vp);
@@ -78,7 +80,7 @@ void DemoApplication::Render(const pledGL::GameTime& game_time, pledGL::Renderer
     renderer.DrawQuad({0.5f, 1.0f, 0.0f}, {size * 0.3f, size * 0.8f, 0.0f}, {0.0f, 0.0f, 1.0f});
     renderer.DrawTri({0.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
     renderer.DrawTri({1.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
-
+    renderer.DrawTri({2.8f, size, 0.0f}, {size * 0.2f, size * 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f});
 
     renderer.EndDraw();
 }

@@ -27,8 +27,8 @@ struct RendererData {
     std::shared_ptr<pledGL::VertexBuffer> TriVertexBuffer; 
     unsigned int TriIndicesBuffer;
     uint32_t TriIndexCount = 0; 
-    Vertex* TriVertexBufferBase = nullptr;
-    Vertex* TriVertexBufferPtr = nullptr;
+    Vertex* TriVertexBufferBase;
+    Vertex* TriVertexBufferPtr;
 
     glm::vec4 TriVertPositions[3];
 
@@ -37,8 +37,8 @@ struct RendererData {
     unsigned int QuadVertexArray; 
     std::shared_ptr<pledGL::VertexBuffer> QuadVertexBuffer; 
     unsigned int QuadIndicesBuffer;
-    Vertex* QuadVertexBufferBase = nullptr;
-    Vertex* QuadVertexBufferPtr = nullptr;
+    Vertex* QuadVertexBufferBase;
+    Vertex* QuadVertexBufferPtr;
     uint32_t QuadIndexCount = 0;
 
     glm::vec4 QuadVertPositions[4];
@@ -73,7 +73,7 @@ void pledGL::Renderer::Init() {
 
     uint32_t triIndices[maxIndices];
     uint32_t offset = 0;
-    for(uint32_t i = 0; i < maxIndices; i += 3) {
+    for(uint32_t i = 0; i < maxIndices/2; i += 3) {
         triIndices[i + 0] = offset + 0;
         triIndices[i + 1] = offset + 1;
         triIndices[i + 2] = offset + 2;
@@ -83,7 +83,7 @@ void pledGL::Renderer::Init() {
     
     uint32_t quadIndices[maxIndices];
     offset = 0;
-    for(uint32_t i = 0; i < maxIndices; i += 6) {
+    for(uint32_t i = 0; i < maxIndices/2; i += 6) {
         quadIndices[i + 0] = offset + 0;
         quadIndices[i + 1] = offset + 1;
         quadIndices[i + 2] = offset + 2;
@@ -161,10 +161,7 @@ void pledGL::Renderer::Init() {
 
 void pledGL::Renderer::Exit() {
     delete[] s_Data.TriVertexBufferBase;
-    delete s_Data.TriVertexBufferPtr;
-
     delete[] s_Data.QuadVertexBufferBase;
-    delete s_Data.QuadVertexBufferPtr;
 }
 
 void pledGL::Renderer::StartDraw(const glm::mat4 vp) {
