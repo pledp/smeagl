@@ -13,7 +13,7 @@ namespace pledGL {
         virtual void Init(bool createWindow) = 0;
         virtual void Exit() = 0;
         virtual void Flush() = 0;
-        virtual void ProcessInput(pledGL::GameBase& context) = 0;
+        virtual void ProcessInput(GameBase& context) = 0;
         virtual void AddDelay(uint64_t delay) = 0;
     };
 };

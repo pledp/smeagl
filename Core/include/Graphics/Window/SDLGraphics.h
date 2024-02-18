@@ -15,7 +15,7 @@ namespace pledGL {
         void Init(bool createWindow) override;
         void Exit() override;
         void Flush() override;
-        void ProcessInput(pledGL::GameBase& context) override;
+        void ProcessInput(GameBase& context) override;
         void AddDelay(uint64_t delay) override;
 
     private:

@@ -47,7 +47,7 @@ namespace pledGL {
         bool isPlaying = false;
         bool createWindow = false;
 
-        pledGL::GameTime game_time;
+        GameTime game_time;
 
         void ProcessInput();
         void initRun();

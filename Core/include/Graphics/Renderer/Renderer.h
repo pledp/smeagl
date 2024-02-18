@@ -33,8 +33,8 @@ namespace pledGL {
          * @param size Size of the Tri.
          * @param color Color of the Tri.
         */
-        void DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color);
-        void DrawTri(const pledGL::Vector3& pos, const pledGL::Vector3& size);
+        void DrawTri(const Vector3& pos, const Vector3& size, const Vector3& color);
+        void DrawTri(const Vector3& pos, const Vector3& size);
 
 
         /**
@@ -43,11 +43,11 @@ namespace pledGL {
          * @param size Size of the quad.
          * @param color Color of the quad.
         */
-        void DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size, const pledGL::Vector3& color);
-        void DrawQuad(const pledGL::Vector3& pos, const pledGL::Vector3& size);
+        void DrawQuad(const Vector3& pos, const Vector3& size, const Vector3& color);
+        void DrawQuad(const Vector3& pos, const Vector3& size);
 
 
-        void ClearScreen(const pledGL::Vector3& col);
+        void ClearScreen(const Vector3& col);
     };
 };
 
