@@ -1,6 +1,6 @@
-# pledGL
+# smeagl
 
-Very basic OpenGL & SDL game framework.
+Very basic OpenGL & SDL2 game framework.
 
 ## Things:
 
